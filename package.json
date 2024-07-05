@@ -1,23 +1,23 @@
 {
-    "name": "svg-grabber",
-    "version": "2.0.0",
-    "description": "This is a Chrome extension to preview and download all the svg assets from a website.",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "vite": "^5.3.3",
-        "vite-plugin-css": "^1.0.4",
-        "vite-plugin-static-copy": "^1.0.6"
-    },
-    "dependencies": {
-        "file-saver": "^2.0.5",
-        "jszip": "^3.10.1"
-    }
+  "name": "svg-grabber",
+  "version": "2.0.0",
+  "description": "This is a Chrome extension to preview and download all the svg assets from a website.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.3.3",
+    "vite-plugin-css": "^1.0.4",
+    "vite-plugin-static-copy": "^1.0.6"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1"
+  }
 }
