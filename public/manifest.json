@@ -27,7 +27,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["getsvgs.html"],
+            "resources": ["getsvgs.html", "getsvgs.js"],
             "matches": ["<all_urls>"]
         }
     ]
