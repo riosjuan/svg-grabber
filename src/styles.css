@@ -1,13 +1,71 @@
 :root {
-  --background-color: #f7f9fa;
-  --primary-color: #1d1d25;
-  --text-color: #1d1d25;
+  /* Base colors */
+  --white: rgba(255, 255, 255, 1);
+  --blue: rgba(47, 44, 248, 1);
+  --blue-hover: rgba(105, 44, 248, 1);
+  --background-gray: rgba(240, 240, 250, 1);
+  --text-dark: rgba(29, 29, 37, 1);
+  --text-medium: rgba(72, 73, 77, 1);
+  --text-light: rgba(117, 119, 124, 1);
+  --border-gray: rgba(231, 232, 235, 1);
+
+  /* Semantic colors */
+  --color-primary: var(--blue);
+  --color-primary-hover: var(--blue-hover);
+  --color-background: var(--background-gray);
+  --color-text: var(--text-dark);
+  --color-text-secondary: var(--text-medium);
+  --color-text-tertiary: var(--text-light);
+  --color-border: var(--border-gray);
+  --color-card: var(--white);
+
+  /* Component colors */
+  --color-button: var(--color-primary);
+  --color-button-hover: var(--color-primary-hover);
+  --color-button-text: var(--white);
+  --color-notification: var(--color-primary);
+
+  /* Typography */
   --font-size: 16px;
+  --small-font-size: 0.85rem;
+  --h1-font-size: 1.25rem;
+
+  /* Layout */
+  --border-radius: 0.25rem;
+  --transition-duration: 0.25s;
+
+  /* Shadows */
+  --shadow-color: 240deg 15% 72%;
+  --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
+    0.4px 0.8px 1.1px -1px hsl(var(--shadow-color) / 0.21),
+    0.8px 1.7px 2.3px -2px hsl(var(--shadow-color) / 0.24);
+  --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.19),
+    0.8px 1.6px 2.1px -0.7px hsl(var(--shadow-color) / 0.21),
+    1.8px 3.6px 4.8px -1.3px hsl(var(--shadow-color) / 0.24),
+    4.2px 8.4px 11.3px -2px hsl(var(--shadow-color) / 0.26);
+  --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
+    1.2px 2.4px 3.2px -0.3px hsl(var(--shadow-color) / 0.19),
+    2.2px 4.3px 5.8px -0.6px hsl(var(--shadow-color) / 0.2),
+    3.4px 6.7px 9px -0.9px hsl(var(--shadow-color) / 0.21),
+    5.1px 10.3px 13.8px -1.1px hsl(var(--shadow-color) / 0.22),
+    7.8px 15.6px 20.9px -1.4px hsl(var(--shadow-color) / 0.23),
+    11.5px 23.1px 31px -1.7px hsl(var(--shadow-color) / 0.24),
+    16.8px 33.5px 45px -2px hsl(var(--shadow-color) / 0.25);
+  --header-box-shadow: var(--shadow-elevation-low);
+  --card-box-shadow: var(--shadow-elevation-medium);
+  --notification-box-shadow: var(--shadow-elevation-medium);
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   font-size: var(--font-size);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .sans-serif {
@@ -19,25 +77,25 @@ body {
 header {
   display: flex;
   align-items: center;
-  background-color: var(--background-color);
-  border-bottom: 1px solid #e7e8eb;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
   padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+  box-shadow: var(--header-box-shadow);
 }
 
 .logo {
-  color: #1d1d25;
+  color: var(--color-text);
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 0.5rem;
 }
 
 .title {
-  color: #1d1d25;
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -52,7 +110,7 @@ header {
 }
 
 h1 {
-  color: #48494d;
+  color: var(--color-text-secondary);
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.4;
@@ -61,7 +119,7 @@ h1 {
 
 .disclaimer {
   max-width: 28em;
-  color: #75777c;
+  color: var(--color-text-tertiary);
   font-size: 0.85rem;
   font-weight: 300;
   line-height: 1.5;
@@ -69,23 +127,23 @@ h1 {
 }
 
 .all-from button {
-  color: #fff;
-  background-color: #2f2cf8;
+  color: var(--color-button-text);
+  background-color: var(--color-button);
   padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.25s ease-in-out;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-duration) ease-in-out;
   font-size: var(--font-size);
 }
 
 .all-from button:hover,
 .all-from button:focus {
-  color: #fff;
-  background-color: #692cf8;
+  color: var(--color-button-text);
+  background-color: var(--color-button-hover);
 }
 
 .allsvg-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, max-content));
   grid-template-rows: auto;
   grid-column-gap: 2.5rem;
   grid-row-gap: 2.5rem;
@@ -93,11 +151,11 @@ h1 {
 }
 
 .svg-card {
-  color: #353336;
+  color: var(--color-text);
   padding: 2rem 2rem 0;
-  border-radius: 0.25rem;
-  background-color: #fff;
-  box-shadow: 0px 10px 48px -16px rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius);
+  background-color: var(--color-card);
+  box-shadow: var(--card-box-shadow);
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -143,16 +201,16 @@ a {
 
 button,
 a {
-  color: #2f2cf8;
+  color: var(--color-button);
   cursor: pointer;
-  transition: color 200ms ease-in-out;
+  transition: color var(--transition-duration) ease-in-out;
 }
 
 button:hover,
 button:focus,
 a:hover,
 a:focus {
-  color: #692cf8;
+  color: var(--color-button-hover);
 }
 
 .icon {
@@ -177,29 +235,27 @@ a:focus {
   display: flex;
   align-items: center;
   position: fixed;
-  background-color: rgba(42, 42, 248, 0.92);
-  color: #fff;
+  background-color: var(--color-notification);
+  color: var(--color-button-text);
   padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: calc(var(--border-radius) * 2);
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 10;
   opacity: 0;
-  box-shadow: 0px 8px 16px -2px rgba(52, 36, 221, 0.3);
-  transition: all 0.25s ease-in-out;
-}
-
-.notification-on {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.notification-off {
+  box-shadow: var(--notification-box-shadow);
+  transition: opacity var(--transition-duration) ease-in-out,
+    transform var(--transition-duration) ease-in-out;
   transform: translateX(240px);
-}
 
-.notification p {
-  margin: 0;
+  &.notification-on {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  & p {
+    margin: 0;
+  }
 }
 
 .hidden {
