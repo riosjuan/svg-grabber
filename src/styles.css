@@ -9,7 +9,7 @@
   --text-light: rgba(117, 119, 124, 1);
   --border-gray: rgba(231, 232, 235, 1);
 
-  /* Semantic colors */
+  /* Semantic and Component colors */
   --color-primary: var(--blue);
   --color-primary-hover: var(--blue-hover);
   --color-background: var(--background-gray);
@@ -18,8 +18,6 @@
   --color-text-tertiary: var(--text-light);
   --color-border: var(--border-gray);
   --color-card: var(--white);
-
-  /* Component colors */
   --color-button: var(--color-primary);
   --color-button-hover: var(--color-primary-hover);
   --color-button-text: var(--white);
@@ -81,6 +79,7 @@ header {
   border-bottom: 1px solid var(--color-border);
   padding: 1rem 1.5rem;
   position: sticky;
+  justify-content: space-between;
   top: 0;
   left: 0;
   right: 0;
@@ -126,7 +125,7 @@ h1 {
   margin-bottom: 2rem;
 }
 
-.all-from button {
+.button-download-all {
   color: var(--color-button-text);
   background-color: var(--color-button);
   padding: 0.5rem 1rem;
@@ -135,10 +134,14 @@ h1 {
   font-size: var(--font-size);
 }
 
-.all-from button:hover,
-.all-from button:focus {
+.button-download-all:hover,
+.button-download-all:focus {
   color: var(--color-button-text);
   background-color: var(--color-button-hover);
+}
+
+.button-download-all-hidden {
+  display: none;
 }
 
 .allsvg-container {
@@ -186,10 +189,6 @@ button {
   font-size: var(--font-size);
 }
 
-.copy {
-  padding: 0 1.5rem 0 0;
-}
-
 .button-icon {
   display: flex;
   align-items: baseline;
@@ -204,6 +203,7 @@ a {
   color: var(--color-button);
   cursor: pointer;
   transition: color var(--transition-duration) ease-in-out;
+  font-weight: 500;
 }
 
 button:hover,
