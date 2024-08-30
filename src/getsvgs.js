@@ -1,5 +1,6 @@
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { setupScrollBasedButtonVisibility } from './ui-utils.js';
 
 // Function to set SVGs and update the page content
 const setSvgsUrl = (data, sender, pageUrl) => {
@@ -102,42 +103,42 @@ const copySvg = (event) => {
 };
 
 // Set up 'Download All' button functionality
-document.querySelectorAll('.button-download-all').forEach((button) => {
-  button.addEventListener('click', () => {
-    const zip = new JSZip();
-    document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
-      zip.file(`svg${index}.svg`, svg.outerHTML);
-    });
+const setupDownloadAllButton = () => {
+  document.querySelectorAll('.button-download-all').forEach((button) => {
+    button.addEventListener('click', () => {
+      const zip = new JSZip();
+      document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
+        zip.file(`svg${index}.svg`, svg.outerHTML);
+      });
 
-    zip.generateAsync({ type: 'blob' }).then((content) => {
-      saveAs(content, 'svgs_collection.zip');
+      zip.generateAsync({ type: 'blob' }).then((content) => {
+        saveAs(content, 'svgs_collection.zip');
+      });
     });
   });
-});
+};
 
-// Listen for incoming messages from the background script
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.message === 'load_svgs') {
-    setSvgsUrl(message.data, message.sender, message.pageUrl);
-  }
-});
-
-//TODO: move to another file
-const header = document.querySelector('.header');
-const downloadAllButtons = document.querySelectorAll('.button-download-all');
-
-if (header && downloadAllButtons.length >= 2) {
-  const headerHeight = header.offsetHeight;
-  const fixedButton = downloadAllButtons[0];
-  const originalButton = downloadAllButtons[1];
-
-  window.addEventListener('scroll', () => {
-    const originalButtonRect = originalButton.getBoundingClientRect();
-
-    if (originalButtonRect.top < headerHeight) {
-      fixedButton.classList.remove('button-download-all-hidden');
-    } else {
-      fixedButton.classList.add('button-download-all-hidden');
+// Use event delegation for copy buttons
+const setupCopyButtons = () => {
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('copy')) {
+      copySvg(event);
     }
   });
-}
+};
+
+// Listen for incoming messages from the background script
+const initializePage = () => {
+  setupDownloadAllButton();
+  setupCopyButtons();
+  setupScrollBasedButtonVisibility();
+
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.message === 'load_svgs') {
+      setSvgsUrl(message.data, message.sender, message.pageUrl);
+    }
+  });
+};
+
+// Run initialization when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initializePage);
