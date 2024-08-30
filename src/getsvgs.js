@@ -83,23 +83,24 @@ const copySvg = (event) => {
 
   const svg = svgCard.querySelector('svg');
 
-  if (svg) {
-    navigator.clipboard
-      .writeText(svg.outerHTML)
-      .then(() => {
-        if (notification) {
-          notification.classList.add('notification-on');
-          setTimeout(() => {
-            notification.classList.remove('notification-on');
-          }, 1500);
-        }
-      })
-      .catch((err) => {
-        console.error('Failed to copy text: ', err);
-      });
-  } else {
+  if (!svg) {
     console.error('SVG element not found');
+    return;
   }
+
+  navigator.clipboard
+    .writeText(svg.outerHTML)
+    .then(() => {
+      if (!notification) return;
+
+      notification.classList.add('notification-on');
+      setTimeout(() => {
+        notification.classList.remove('notification-on');
+      }, 1500);
+    })
+    .catch((err) => {
+      console.error('Failed to copy text: ', err);
+    });
 };
 
 // Set up 'Download All' button functionality
