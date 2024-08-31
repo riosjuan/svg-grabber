@@ -6,8 +6,8 @@ import { setupScrollBasedButtonVisibility } from './ui-utils.js';
 const setSvgsUrl = (data, sender, pageUrl) => {
   const header = document.getElementById('header');
   const senderLink = document.getElementById('sender-url');
-  const svgContainer = document.getElementById('svgcard');
-  const downloadAllButtons = document.querySelectorAll('.button-download-all');
+  const svgGallery = document.getElementById('gallery-svg');
+  const downloadAllButtons = document.querySelectorAll('.btn-download-all');
   const disclaimer = document.querySelector('.disclaimer');
 
   if (header) {
@@ -19,8 +19,8 @@ const setSvgsUrl = (data, sender, pageUrl) => {
     senderLink.href = pageUrl;
   }
 
-  if (svgContainer) {
-    svgContainer.innerHTML = ''; // Clear any existing SVG cards
+  if (svgGallery) {
+    svgGallery.innerHTML = ''; // Clear any existing SVG cards
   }
 
   if (data.length === 0) {
@@ -36,20 +36,20 @@ const setSvgsUrl = (data, sender, pageUrl) => {
     }
   } else {
     data.forEach((svg, index) => {
-      if (svgContainer) {
+      if (svgGallery) {
         const element = document.createElement('div');
         const base64doc = btoa(unescape(encodeURIComponent(svg)));
         element.innerHTML = `
-          <div>
+          <div class="svg-card__content">
             ${svg}
           </div>
-          <div class="actions">
+          <div class="svg-card__actions">
             <button class='copy'>Copy</button>
             <a download="${sender}-${index}.svg" href='data:text/svg;base64,${base64doc}'>Download</a>
           </div>
         `;
         element.classList.add('svg-card');
-        svgContainer.appendChild(element);
+        svgGallery.appendChild(element);
 
         // Add event listener for copy button
         const copyButton = element.querySelector('button.copy');
@@ -93,9 +93,9 @@ const copySvg = (event) => {
     .then(() => {
       if (!notification) return;
 
-      notification.classList.add('notification-on');
+      notification.classList.add('notification--active');
       setTimeout(() => {
-        notification.classList.remove('notification-on');
+        notification.classList.remove('notification--active');
       }, 1500);
     })
     .catch((err) => {
@@ -105,7 +105,7 @@ const copySvg = (event) => {
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
-  document.querySelectorAll('.button-download-all').forEach((button) => {
+  document.querySelectorAll('.btn-download-all').forEach((button) => {
     button.addEventListener('click', () => {
       const zip = new JSZip();
       document.querySelectorAll('.svg-card svg').forEach((svg, index) => {

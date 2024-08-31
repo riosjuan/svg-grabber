@@ -6,16 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>&lt;svg&gt;grabber</title>
     <link rel="stylesheet" href="/styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Inconsolata:400,700"
-      rel="stylesheet"
-    />
   </head>
 
-  <body class="sans-serif">
+  <body>
     <header class="header">
-      <div style="display: flex; align-items: center">
-        <div class="logo">
+      <div class="logo">
+        <div class="logo__icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
             <g fill="none" fill-rule="evenodd">
               <path
@@ -29,9 +25,9 @@
             </g>
           </svg>
         </div>
-        <p class="title">&lt;svg&gt;grabber</p>
+        <p class="logo__text">&lt;svg&gt;grabber</p>
       </div>
-      <button class="button-download-all button-download-all-hidden">
+      <button class="btn-download-all btn-download-all--hidden fade-in">
         <div class="button-icon">
           Download all SVGs
           <div class="icon-small icon-right">
@@ -47,7 +43,7 @@
     </header>
 
     <div class="container">
-      <div class="all-from">
+      <div class="svg-source-info">
         <h1 id="header"></h1>
         <a id="sender-url" href=""></a>
         <p class="disclaimer">
@@ -56,7 +52,7 @@
           are offered to you as a convenience for lawful use with proper
           permission from the copyright and/or trademark holder only.
         </p>
-        <button class="button-download-all">
+        <button class="btn-download-all">
           <div class="button-icon">
             Download all SVGs
             <div class="icon-small icon-right">
@@ -70,9 +66,13 @@
           </div>
         </button>
       </div>
-      <div id="svgcard" class="allsvg-container"></div>
+      <div id="gallery-svg" class="grid-svg"></div>
       <input class="clipboard hidden" />
     </div>
+
+    <footer class="footer">
+      by <a href="https://x.com/juanriosnl">@juanriosnl</a>
+    </footer>
 
     <div class="notification">
       <div class="icon icon-left">

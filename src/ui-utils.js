@@ -1,8 +1,7 @@
 export const setupScrollBasedButtonVisibility = () => {
   const header = document.querySelector('.header');
-  const [fixedButton, originalButton] = document.querySelectorAll(
-    '.button-download-all'
-  );
+  const [fixedButton, originalButton] =
+    document.querySelectorAll('.btn-download-all');
 
   if (!header || !fixedButton || !originalButton) return;
 
@@ -13,10 +12,7 @@ export const setupScrollBasedButtonVisibility = () => {
     const shouldBeFixed =
       originalButton.getBoundingClientRect().top < headerHeight;
     if (shouldBeFixed !== isFixed) {
-      fixedButton.classList.toggle(
-        'button-download-all-hidden',
-        !shouldBeFixed
-      );
+      fixedButton.classList.toggle('btn-download-all--hidden', !shouldBeFixed);
       isFixed = shouldBeFixed;
     }
   };

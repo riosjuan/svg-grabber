@@ -1,3 +1,4 @@
+/* 1. CSS Variables */
 :root {
   /* Base colors */
   --white: rgba(255, 255, 255, 1);
@@ -54,25 +55,24 @@
   --notification-box-shadow: var(--shadow-elevation-medium);
 }
 
+/* 2. Global Styles */
 body {
   background-color: var(--color-background);
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
   color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: var(--font-size);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.sans-serif {
-  font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
-    'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
-    sans-serif;
-}
-
-header {
+/* 3. Layout Components */
+.header {
   display: flex;
   align-items: center;
   background-color: var(--color-background);
@@ -86,28 +86,16 @@ header {
   box-shadow: var(--header-box-shadow);
 }
 
-.logo {
-  color: var(--color-text);
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: 0.5rem;
-}
-
-.title {
-  color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
 .container {
   padding: 4rem 2rem;
 }
 
-.all-from {
-  margin-bottom: 6rem;
+.footer {
+  padding: 2rem;
+  text-align: center;
 }
 
+/* 4. Typography */
 h1 {
   color: var(--color-text-secondary);
   font-size: 1.25rem;
@@ -125,7 +113,8 @@ h1 {
   margin-bottom: 2rem;
 }
 
-.button-download-all {
+/* 5. Buttons */
+.btn-download-all {
   color: var(--color-button-text);
   background-color: var(--color-button);
   padding: 0.5rem 1rem;
@@ -134,34 +123,38 @@ h1 {
   font-size: var(--font-size);
 }
 
-.button-download-all:hover,
-.button-download-all:focus {
+.btn-download-all:hover,
+.btn-download-all:focus {
   color: var(--color-button-text);
   background-color: var(--color-button-hover);
 }
 
-.button-download-all-hidden {
+.btn-download-all--hidden {
   display: none;
 }
 
-.allsvg-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, max-content));
-  grid-template-rows: auto;
-  grid-column-gap: 2.5rem;
-  grid-row-gap: 2.5rem;
-  align-content: stretch;
+.button-icon {
+  display: flex;
+  align-items: baseline;
 }
 
+/* 6. Cards */
 .svg-card {
   color: var(--color-text);
-  padding: 2rem 2rem 0;
+  padding: 2rem;
   border-radius: var(--border-radius);
   background-color: var(--color-card);
   box-shadow: var(--card-box-shadow);
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+}
+
+.svg-card__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-end: 2rem;
 
   svg {
     height: 100%;
@@ -170,28 +163,107 @@ h1 {
   }
 }
 
-.svg-card > div:first-child {
+.svg-card__actions {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+/* 7. Icons */
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-small {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-left {
+  margin-right: 1rem;
+}
+
+.icon-right {
+  margin-left: 1rem;
+}
+
+/* 8. Notifications */
+.notification {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background-color: var(--color-notification);
+  color: var(--color-button-text);
+  padding: 1rem 1.5rem;
+  border-radius: calc(var(--border-radius) * 2);
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  opacity: 0;
+  box-shadow: var(--notification-box-shadow);
+  transition: opacity var(--transition-duration) ease-in-out,
+    transform var(--transition-duration) ease-in-out;
+  transform: translateX(240px);
+
+  &.notification--active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  & p {
+    margin: 0;
+  }
+}
+
+/* 9. Utility Classes */
+.hidden {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* 10. Specific Component Styles */
+.logo {
+  display: flex;
   align-items: center;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 0;
+.logo__icon {
+  color: var(--color-text);
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.5rem;
 }
 
+.logo__text {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.svg-source-info {
+  margin-bottom: 6rem;
+}
+
+.grid-svg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, max-content));
+  grid-template-rows: auto;
+  grid-column-gap: 2.5rem;
+  grid-row-gap: 2.5rem;
+  align-content: stretch;
+}
+
+/* 11. Generic Element Styles */
 button {
   background: none;
   outline: none;
   border: none;
   font-size: var(--font-size);
-}
-
-.button-icon {
-  display: flex;
-  align-items: baseline;
 }
 
 a {
@@ -213,56 +285,17 @@ a:focus {
   color: var(--color-button-hover);
 }
 
-.icon {
-  width: 1.5rem;
-  height: 1.5rem;
+.fade-in {
+  animation: fadeIn 250ms cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-.icon-small {
-  width: 1rem;
-  height: 1rem;
-}
-
-.icon-left {
-  margin-right: 1rem;
-}
-
-.icon-right {
-  margin-left: 1rem;
-}
-
-.notification {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  background-color: var(--color-notification);
-  color: var(--color-button-text);
-  padding: 1rem 1.5rem;
-  border-radius: calc(var(--border-radius) * 2);
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 10;
-  opacity: 0;
-  box-shadow: var(--notification-box-shadow);
-  transition: opacity var(--transition-duration) ease-in-out,
-    transform var(--transition-duration) ease-in-out;
-  transform: translateX(240px);
-
-  &.notification-on {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  to {
     opacity: 1;
-    transform: translateX(0);
+    scale: 1;
   }
-
-  & p {
-    margin: 0;
-  }
-}
-
-.hidden {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(0);
 }
