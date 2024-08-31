@@ -4,7 +4,7 @@
   --white: rgba(255, 255, 255, 1);
   --blue: rgba(47, 44, 248, 1);
   --blue-hover: rgba(105, 44, 248, 1);
-  --background-gray: rgba(240, 240, 250, 1);
+  --background-gray: hsl(200, 23%, 97%);
   --text-dark: rgba(29, 29, 37, 1);
   --text-medium: rgba(72, 73, 77, 1);
   --text-light: rgba(117, 119, 124, 1);
@@ -34,7 +34,7 @@
   --transition-duration: 0.25s;
 
   /* Shadows */
-  --shadow-color: 240deg 15% 72%;
+  --shadow-color: 200deg 15% 72%;
   --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
     0.4px 0.8px 1.1px -1px hsl(var(--shadow-color) / 0.21),
     0.8px 1.7px 2.3px -2px hsl(var(--shadow-color) / 0.24);
