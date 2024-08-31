@@ -17,13 +17,6 @@
     "128": "svggrabber128.png"
   },
   "permissions": ["activeTab", "scripting", "clipboardWrite"],
-  "content_scripts": [
-    {
-      "matches": ["https://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_end"
-    }
-  ],
   "web_accessible_resources": [
     {
       "resources": ["getsvgs.html", "getsvgs.js"],

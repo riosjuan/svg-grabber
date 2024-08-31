@@ -4,8 +4,10 @@ let id = 100;
 
 // Listen for clicks on the browser action
 chrome.action.onClicked.addListener(async (tab) => {
-  chrome.tabs.sendMessage(tab.id, {
-    message: 'clicked_browser_action',
+  // Execute content.js in the active tab
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ['content.js'],
   });
 });
 

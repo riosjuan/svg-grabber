@@ -137,16 +137,5 @@ const optimizeSVG = (svgString) => {
   return svgString.replace(/>\s+</g, '><');
 };
 
-// Message listener
-chrome.runtime.onMessage.addListener((request, sendResponse) => {
-  const { message } = request;
-
-  if (message === 'clicked_browser_action' || message === 'load_svgs') {
-    processSVGs();
-    sendResponse({ success: true });
-  } else {
-    sendResponse({ success: false, error: 'Unknown message type' });
-  }
-
-  return true; // Allow async response
-});
+// Call processSVGs immediately when the script is injected
+processSVGs();
