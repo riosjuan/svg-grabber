@@ -251,7 +251,7 @@ h1 {
 
 .grid-svg {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-template-rows: auto;
   grid-column-gap: 2.5rem;
   grid-row-gap: 2.5rem;
