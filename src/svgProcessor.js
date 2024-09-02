@@ -1,6 +1,14 @@
-// SVG processing functions
+// Helper functions
+const serializeSVGNode = (svgNode) => {
+  const serializer = new XMLSerializer();
+  return serializer.serializeToString(svgNode);
+};
 
-// Attribute modification functions
+export const optimizeSVG = (svgString) => {
+  return svgString.replace(/>\s+</g, '><');
+};
+
+// SVG attribute modification functions
 const convertDimensionsToViewBox = (svgNode) => {
   const width = svgNode.getAttribute('width');
   const height = svgNode.getAttribute('height');
@@ -13,28 +21,33 @@ const convertDimensionsToViewBox = (svgNode) => {
 };
 
 const removeClassAttribute = (svgNode) => {
-  // Helper function to remove class attribute from a node
   const removeClass = (node) => node.removeAttribute('class');
-
-  // Remove class attribute from the svgNode itself
   removeClass(svgNode);
-
-  // Remove class attribute from all descendant nodes
   const descendants = svgNode.getElementsByTagName('*');
   Array.from(descendants).forEach(removeClass);
 };
 
-// SVG processing function
-export const processSVGNode = (node) => {
+// SVG processing functions
+const processSVGNode = (node) => {
   const clonedNode = node.cloneNode(true);
   convertDimensionsToViewBox(clonedNode);
   removeClassAttribute(clonedNode);
   return clonedNode;
 };
 
-// SVG optimization function
-export const optimizeSVG = (svgString) => {
-  return svgString.replace(/>\s+</g, '><');
+const removeDuplicateSVGs = (svgNodes) => {
+  const uniqueSVGs = [];
+  const seenSVGs = new Set();
+
+  svgNodes.forEach((svgNode) => {
+    const serializedSVG = serializeSVGNode(svgNode);
+    if (!seenSVGs.has(serializedSVG)) {
+      seenSVGs.add(serializedSVG);
+      uniqueSVGs.push(svgNode);
+    }
+  });
+
+  return uniqueSVGs;
 };
 
 // DOM-related SVG processing functions
@@ -67,26 +80,4 @@ export const processExternalSVGs = async () => {
   });
   const svgNodes = (await Promise.all(svgPromises)).filter(Boolean);
   return removeDuplicateSVGs(svgNodes);
-};
-
-// Function to serialize an SVG node to a string
-const serializeSVGNode = (svgNode) => {
-  const serializer = new XMLSerializer();
-  return serializer.serializeToString(svgNode);
-};
-
-// Function to remove duplicate SVG nodes
-const removeDuplicateSVGs = (svgNodes) => {
-  const uniqueSVGs = [];
-  const seenSVGs = new Set();
-
-  svgNodes.forEach((svgNode) => {
-    const serializedSVG = serializeSVGNode(svgNode);
-    if (!seenSVGs.has(serializedSVG)) {
-      seenSVGs.add(serializedSVG);
-      uniqueSVGs.push(svgNode);
-    }
-  });
-
-  return uniqueSVGs;
 };
