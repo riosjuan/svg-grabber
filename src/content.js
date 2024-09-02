@@ -13,7 +13,7 @@ const processSVGs = async () => {
       processExternalSVGs(),
     ]);
 
-    // Combine and process all SVGs (without deduplication)
+    // Combine and process all SVGs
     const allSVGs = [...inlineSVGs, ...externalSVGs];
     const processedSVGs = allSVGs.map((svg) => optimizeSVG(svg.outerHTML));
 

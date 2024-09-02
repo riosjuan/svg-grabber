@@ -40,7 +40,11 @@ export const optimizeSVG = (svgString) => {
 // DOM-related SVG processing functions
 export const processInlineSVGs = () => {
   try {
-    return Array.from(document.querySelectorAll('svg'), processSVGNode);
+    const svgNodes = Array.from(
+      document.querySelectorAll('svg'),
+      processSVGNode
+    );
+    return removeDuplicateSVGs(svgNodes);
   } catch (error) {
     console.error('Error processing inline SVGs:', error);
     return [];
@@ -61,5 +65,28 @@ export const processExternalSVGs = async () => {
       return null;
     }
   });
-  return (await Promise.all(svgPromises)).filter(Boolean);
+  const svgNodes = (await Promise.all(svgPromises)).filter(Boolean);
+  return removeDuplicateSVGs(svgNodes);
+};
+
+// Function to serialize an SVG node to a string
+const serializeSVGNode = (svgNode) => {
+  const serializer = new XMLSerializer();
+  return serializer.serializeToString(svgNode);
+};
+
+// Function to remove duplicate SVG nodes
+const removeDuplicateSVGs = (svgNodes) => {
+  const uniqueSVGs = [];
+  const seenSVGs = new Set();
+
+  svgNodes.forEach((svgNode) => {
+    const serializedSVG = serializeSVGNode(svgNode);
+    if (!seenSVGs.has(serializedSVG)) {
+      seenSVGs.add(serializedSVG);
+      uniqueSVGs.push(svgNode);
+    }
+  });
+
+  return uniqueSVGs;
 };
