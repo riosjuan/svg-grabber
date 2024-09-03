@@ -9,12 +9,16 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_icon": "svggrabber48.png"
+    "default_icon": {
+      "16": "svg-grabber-16.png",
+      "48": "svg-grabber-48.png",
+      "128": "svg-grabber-128.png"
+    }
   },
   "icons": {
-    "16": "svggrabber16.png",
-    "48": "svggrabber48.png",
-    "128": "svggrabber128.png"
+    "16": "svg-grabber-16.png",
+    "48": "svg-grabber-48.png",
+    "128": "svg-grabber-128.png"
   },
   "permissions": ["activeTab", "scripting", "clipboardWrite"],
   "web_accessible_resources": [

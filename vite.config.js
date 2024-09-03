@@ -23,9 +23,9 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         { src: 'public/manifest.json', dest: '' },
-        { src: 'public/svggrabber16.png', dest: '' },
-        { src: 'public/svggrabber48.png', dest: '' },
-        { src: 'public/svggrabber128.png', dest: '' },
+        { src: 'public/svg-grabber-16.png', dest: '' },
+        { src: 'public/svg-grabber-48.png', dest: '' },
+        { src: 'public/svg-grabber-128.png', dest: '' },
         { src: 'public/svg-grabber.html', dest: '' },
       ],
     }),
