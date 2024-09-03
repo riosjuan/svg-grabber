@@ -18,7 +18,7 @@ const processSVGs = async () => {
     // Send message to background script
     chrome.runtime.sendMessage({
       message: { type: 'open_new_tab', data: processedSVGs },
-      url: 'getsvgs.html',
+      url: 'svg-grabber.html',
     });
   } catch (error) {
     console.error('Error processing SVGs:', error);

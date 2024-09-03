@@ -1,6 +1,6 @@
 {
   "name": "svg-grabber",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "This is a Chrome extension to preview and download all the svg assets from a website.",
   "main": "index.js",
   "type": "module",

@@ -26,7 +26,7 @@ export default defineConfig({
         { src: 'public/svggrabber16.png', dest: '' },
         { src: 'public/svggrabber48.png', dest: '' },
         { src: 'public/svggrabber128.png', dest: '' },
-        { src: 'public/getsvgs.html', dest: '' },
+        { src: 'public/svg-grabber.html', dest: '' },
       ],
     }),
   ],

@@ -14,7 +14,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message.type === 'open_new_tab') {
     (async () => {
-      const viewTabUrl = chrome.runtime.getURL(`getsvgs.html?id=${id++}`);
+      const viewTabUrl = chrome.runtime.getURL(`svg-grabber.html?id=${id++}`);
       const data = request.message.data;
       const title = sender.tab.title || sender.tab.url;
       const pageUrl = sender.tab.url;
