@@ -4,7 +4,7 @@ import {
   setSvgUrl,
   setupCopyButtons,
   setupScrollBasedButtonVisibility,
-} from './utils/';
+} from './utils';
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
