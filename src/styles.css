@@ -113,6 +113,10 @@ h1 {
   margin-bottom: 2rem;
 }
 
+.sender-url {
+  overflow-wrap: anywhere;
+}
+
 /* 5. Buttons */
 .btn-download-all {
   color: var(--color-button-text);
