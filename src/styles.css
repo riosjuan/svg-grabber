@@ -260,6 +260,10 @@ h1 {
   grid-column-gap: 2.5rem;
   grid-row-gap: 2.5rem;
   align-content: stretch;
+
+  & > * {
+    max-width: 20rem;
+  }
 }
 
 /* 11. Generic Element Styles */
