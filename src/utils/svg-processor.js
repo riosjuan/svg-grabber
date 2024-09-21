@@ -8,9 +8,23 @@ export const optimizeSVG = (svgString) => {
   return svgString.replace(/>\s+</g, '><');
 };
 
-// New helper function to check for <use> elements
+// Check for <use> elements
 const hasUseElement = (svgNode) => {
   return svgNode.querySelector('use') !== null;
+};
+
+// Check and modify single path SVGs
+const checkAndModifySinglePathSVG = (svgNode) => {
+  const children = svgNode.children;
+  if (children.length === 1 && children[0].tagName.toLowerCase() === 'path') {
+    const pathElement = children[0];
+    const fillAttribute = pathElement.getAttribute('fill');
+    if (fillAttribute && /^#(?:fff|FFF|ffffff|FFFFFF)$/.test(fillAttribute)) {
+      pathElement.setAttribute('fill', 'currentColor');
+      return true;
+    }
+  }
+  return false;
 };
 
 // SVG attribute modification functions
@@ -24,6 +38,7 @@ const convertDimensionsToViewBox = (svgNode) => {
   }
 };
 
+// SVG attribute removal functions
 const removeClassAttribute = (svgNode) => {
   const removeClass = (node) => node.removeAttribute('class');
   removeClass(svgNode);
@@ -39,6 +54,7 @@ const processSVGNode = (node) => {
   const clonedNode = node.cloneNode(true);
   convertDimensionsToViewBox(clonedNode);
   removeClassAttribute(clonedNode);
+  checkAndModifySinglePathSVG(clonedNode); // Add this line
   return clonedNode;
 };
 
@@ -47,7 +63,6 @@ const removeDuplicateSVGs = (svgNodes) => {
   const seenSVGs = new Set();
   svgNodes.forEach((svgNode) => {
     if (svgNode) {
-      // Add this check to handle null values
       const serializedSVG = serializeSVGNode(svgNode);
       if (!seenSVGs.has(serializedSVG)) {
         seenSVGs.add(serializedSVG);
@@ -64,7 +79,7 @@ export const processInlineSVGs = () => {
     const svgNodes = Array.from(
       document.querySelectorAll('svg'),
       processSVGNode
-    ).filter(Boolean); // Filter out null values
+    ).filter(Boolean);
     return removeDuplicateSVGs(svgNodes);
   } catch (error) {
     console.error('Error processing inline SVGs:', error);
