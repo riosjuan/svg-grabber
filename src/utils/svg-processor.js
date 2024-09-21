@@ -8,11 +8,15 @@ export const optimizeSVG = (svgString) => {
   return svgString.replace(/>\s+</g, '><');
 };
 
+// New helper function to check for <use> elements
+const hasUseElement = (svgNode) => {
+  return svgNode.querySelector('use') !== null;
+};
+
 // SVG attribute modification functions
 const convertDimensionsToViewBox = (svgNode) => {
   const width = svgNode.getAttribute('width');
   const height = svgNode.getAttribute('height');
-
   if (width && height && !svgNode.getAttribute('viewBox')) {
     svgNode.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svgNode.removeAttribute('width');
@@ -29,6 +33,9 @@ const removeClassAttribute = (svgNode) => {
 
 // SVG processing functions
 const processSVGNode = (node) => {
+  if (hasUseElement(node)) {
+    return null; // Skip SVGs with <use> elements
+  }
   const clonedNode = node.cloneNode(true);
   convertDimensionsToViewBox(clonedNode);
   removeClassAttribute(clonedNode);
@@ -38,15 +45,16 @@ const processSVGNode = (node) => {
 const removeDuplicateSVGs = (svgNodes) => {
   const uniqueSVGs = [];
   const seenSVGs = new Set();
-
   svgNodes.forEach((svgNode) => {
-    const serializedSVG = serializeSVGNode(svgNode);
-    if (!seenSVGs.has(serializedSVG)) {
-      seenSVGs.add(serializedSVG);
-      uniqueSVGs.push(svgNode);
+    if (svgNode) {
+      // Add this check to handle null values
+      const serializedSVG = serializeSVGNode(svgNode);
+      if (!seenSVGs.has(serializedSVG)) {
+        seenSVGs.add(serializedSVG);
+        uniqueSVGs.push(svgNode);
+      }
     }
   });
-
   return uniqueSVGs;
 };
 
@@ -56,7 +64,7 @@ export const processInlineSVGs = () => {
     const svgNodes = Array.from(
       document.querySelectorAll('svg'),
       processSVGNode
-    );
+    ).filter(Boolean); // Filter out null values
     return removeDuplicateSVGs(svgNodes);
   } catch (error) {
     console.error('Error processing inline SVGs:', error);
