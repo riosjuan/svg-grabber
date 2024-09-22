@@ -30,26 +30,38 @@ const hasUseElement = (svgNode) => {
   }
 };
 
-const checkAndModifySinglePathSVG = (svgNode) => {
+const checkAndModifyPathSVG = (svgNode) => {
   try {
     if (!(svgNode instanceof SVGElement)) {
       throw new Error('Input is not an SVG element');
     }
-    const children = svgNode.children;
-    if (children.length === 1 && children[0].tagName.toLowerCase() === 'path') {
-      const pathElement = children[0];
+
+    const pathElements = svgNode.querySelectorAll('path');
+    if (pathElements.length === 0) {
+      return false; // No path elements found
+    }
+
+    let allWhite = true;
+    pathElements.forEach((pathElement) => {
       const fillAttribute = pathElement.getAttribute('fill');
       if (
-        fillAttribute &&
-        /^#(?:fff|FFF|ffffff|FFFFFF)$/i.test(fillAttribute)
+        !fillAttribute ||
+        !/^#(?:fff|FFF|ffffff|FFFFFF)$/i.test(fillAttribute)
       ) {
-        pathElement.setAttribute('fill', 'currentColor');
-        return true;
+        allWhite = false;
       }
+    });
+
+    if (allWhite) {
+      pathElements.forEach((pathElement) => {
+        pathElement.setAttribute('fill', 'currentColor');
+      });
+      return true;
     }
+
     return false;
   } catch (error) {
-    console.error('Error checking and modifying single path SVG:', error);
+    console.error('Error checking and modifying path SVG:', error);
     return false;
   }
 };
@@ -100,7 +112,7 @@ const processSVGNode = (node) => {
     const clonedNode = node.cloneNode(true);
     convertDimensionsToViewBox(clonedNode);
     removeClassAttribute(clonedNode);
-    checkAndModifySinglePathSVG(clonedNode);
+    checkAndModifyPathSVG(clonedNode);
     return clonedNode;
   } catch (error) {
     console.error('Error processing SVG node:', error);
