@@ -1,8 +1,11 @@
+const ERROR_NOT_SVG_ELEMENT = 'Input is not an SVG element';
+const ERROR_PROCESSING_EXTERNAL_SVG = 'Error processing external SVGs:';
+
 // Helper functions
 
 const isSVGElement = (node) => {
   if (!(node instanceof SVGElement)) {
-    throw new Error('Input is not an SVG element');
+    throw new Error(ERROR_NOT_SVG_ELEMENT);
   }
 };
 
@@ -168,14 +171,14 @@ const processExternalSVGs = async () => {
         }
         return processSVGNode(svgDoc.documentElement);
       } catch (error) {
-        console.error('Error processing external SVG:', error);
+        console.error(ERROR_NOT_SVG_ELEMENT, error);
         return null;
       }
     });
     const svgNodes = (await Promise.all(svgPromises)).filter(Boolean);
     return removeDuplicateSVGs(svgNodes);
   } catch (error) {
-    console.error('Error processing external SVGs:', error);
+    console.error(ERROR_PROCESSING_EXTERNAL_SVG, error);
     return [];
   }
 };
