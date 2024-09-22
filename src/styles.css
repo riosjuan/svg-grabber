@@ -147,28 +147,27 @@ h1 {
 
 /* 6. Cards */
 .svg-card {
-  color: var(--color-text);
-  padding: 2rem;
-  border-radius: var(--border-radius);
   background-color: var(--color-card);
+  border-radius: var(--border-radius);
   box-shadow: var(--card-box-shadow);
+  color: var(--color-text);
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-
   max-width: var(--max-card-width);
+  padding: 2rem;
 }
 
 .svg-card__content {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-block-end: 2rem;
 
   svg {
+    aspect-ratio: 1;
     height: 100%;
     width: 100%;
-    aspect-ratio: 1;
   }
 }
 
@@ -260,7 +259,7 @@ h1 {
 
 .grid-svg {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--max-card-width), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
   grid-template-rows: auto;
   grid-column-gap: 2.5rem;
   grid-row-gap: 2.5rem;
