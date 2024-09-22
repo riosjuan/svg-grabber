@@ -1,9 +1,13 @@
 // Helper functions
 
-const serializeSVGNode = (svgNode) => {
-  if (!(svgNode instanceof SVGElement)) {
+const isSVGElement = (node) => {
+  if (!(node instanceof SVGElement)) {
     throw new Error('Input is not an SVG element');
   }
+};
+
+const serializeSVGNode = (svgNode) => {
+  isSVGElement(svgNode);
   const serializer = new XMLSerializer();
   return serializer.serializeToString(svgNode);
 };
@@ -20,9 +24,7 @@ const optimizeSVG = (svgString) => {
 
 const hasUseElement = (svgNode) => {
   try {
-    if (!(svgNode instanceof SVGElement)) {
-      throw new Error('Input is not an SVG element');
-    }
+    isSVGElement(svgNode);
     return svgNode.querySelector('use') !== null;
   } catch (error) {
     console.error('Error checking for <use> element:', error);
@@ -32,10 +34,7 @@ const hasUseElement = (svgNode) => {
 
 const checkAndModifyPathSVG = (svgNode) => {
   try {
-    if (!(svgNode instanceof SVGElement)) {
-      throw new Error('Input is not an SVG element');
-    }
-
+    isSVGElement(svgNode);
     const pathElements = svgNode.querySelectorAll('path');
     if (pathElements.length === 0) {
       return false; // No path elements found
@@ -70,9 +69,7 @@ const checkAndModifyPathSVG = (svgNode) => {
 
 const convertDimensionsToViewBox = (svgNode) => {
   try {
-    if (!(svgNode instanceof SVGElement)) {
-      throw new Error('Input is not an SVG element');
-    }
+    isSVGElement(svgNode);
     const width = svgNode.getAttribute('width');
     const height = svgNode.getAttribute('height');
     if (width && height && !svgNode.getAttribute('viewBox')) {
@@ -87,9 +84,7 @@ const convertDimensionsToViewBox = (svgNode) => {
 
 const removeClassAttribute = (svgNode) => {
   try {
-    if (!(svgNode instanceof SVGElement)) {
-      throw new Error('Input is not an SVG element');
-    }
+    isSVGElement(svgNode);
     const removeClass = (node) => node.removeAttribute('class');
     removeClass(svgNode);
     const descendants = svgNode.getElementsByTagName('*');
@@ -103,9 +98,7 @@ const removeClassAttribute = (svgNode) => {
 
 const processSVGNode = (node) => {
   try {
-    if (!(node instanceof SVGElement)) {
-      throw new Error('Input is not an SVG element');
-    }
+    isSVGElement(node);
     if (hasUseElement(node)) {
       return null; // Skip SVGs with <use> elements
     }
