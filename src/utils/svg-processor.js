@@ -48,7 +48,9 @@ const checkAndModifyPathSVG = (svgNode) => {
       const fillAttribute = pathElement.getAttribute('fill');
       if (
         !fillAttribute ||
-        !/^#(?:fff|FFF|ffffff|FFFFFF)$/i.test(fillAttribute)
+        !/^(?:#(?:fff|FFF|ffffff|FFFFFF)|(?:white|White|WHITE))$/i.test(
+          fillAttribute
+        )
       ) {
         allWhite = false;
       }
