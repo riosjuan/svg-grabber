@@ -44,14 +44,15 @@ const checkAndModifyPathSVG = (svgNode) => {
     }
 
     let allWhite = true;
+
+    const isWhite = (color) => {
+      return /^(#fff(?:fff)?|white)$/i.test(color);
+    };
+
     pathElements.forEach((pathElement) => {
       const fillAttribute = pathElement.getAttribute('fill');
-      if (
-        !fillAttribute ||
-        !/^(?:#(?:fff|FFF|ffffff|FFFFFF)|(?:white|White|WHITE))$/i.test(
-          fillAttribute
-        )
-      ) {
+
+      if (!fillAttribute || !isWhite(fillAttribute)) {
         allWhite = false;
       }
     });
@@ -99,6 +100,15 @@ const removeClassAttribute = (svgNode) => {
   }
 };
 
+const removeStyleAttribute = (svgNode) => {
+  try {
+    isSVGElement(svgNode);
+    svgNode.removeAttribute('style');
+  } catch (error) {
+    console.error('Error removing style attribute:', error);
+  }
+};
+
 // SVG processing functions
 
 const processSVGNode = (node) => {
@@ -110,6 +120,7 @@ const processSVGNode = (node) => {
     const clonedNode = node.cloneNode(true);
     convertDimensionsToViewBox(clonedNode);
     removeClassAttribute(clonedNode);
+    removeStyleAttribute(clonedNode);
     checkAndModifyPathSVG(clonedNode);
     return clonedNode;
   } catch (error) {
