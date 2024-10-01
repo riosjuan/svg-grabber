@@ -35,7 +35,7 @@ const hasUseElement = (svgNode) => {
   }
 };
 
-const checkAndModifyPathSVG = (svgNode) => {
+const updateSVGFillColors = (svgNode) => {
   try {
     isSVGElement(svgNode);
     const pathElements = svgNode.querySelectorAll('path');
@@ -121,7 +121,7 @@ const processSVGNode = (node) => {
     convertDimensionsToViewBox(clonedNode);
     removeClassAttribute(clonedNode);
     removeStyleAttribute(clonedNode);
-    checkAndModifyPathSVG(clonedNode);
+    updateSVGFillColors(clonedNode);
     return clonedNode;
   } catch (error) {
     console.error('Error processing SVG node:', error);
