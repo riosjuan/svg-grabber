@@ -1,4 +1,4 @@
-import { optimizeSVG, processInlineSVGs, processExternalSVGs } from './utils/';
+import { optimizeSVG, processInlineSVGs, processExternalSVGs } from './utils';
 
 // Main function to process SVGs
 const processSVGs = async () => {
