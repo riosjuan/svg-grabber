@@ -9,7 +9,8 @@ export const isSVGElement = (node) => {
 export const hasUseElement = (node) => {
   try {
     isSVGElement(node);
-    return node.querySelector('use') !== null;
+    const useElement = node.querySelector('use');
+    return useElement !== null;
   } catch (error) {
     console.warn('Input is not a valid SVG element:', error.message);
     return false;
