@@ -1,2 +1,2 @@
 export { optimizeSVG } from './helpers';
-export { processInlineSVGs, processExternalSVGs } from './processors';
+export { processExternalSVGs, processInlineSVGs } from './processors';
