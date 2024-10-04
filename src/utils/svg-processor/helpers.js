@@ -11,5 +11,5 @@ export const optimizeSVG = (svgString) => {
     console.error('optimizeSVG: Input is not a string');
     return svgString;
   }
-  return svgString.replace(/>\s+</g, '><');
+  return svgString.replace(/\s*(<|>)/g, '$1'); // Remove all whitespace
 };

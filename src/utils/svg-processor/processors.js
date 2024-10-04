@@ -1,9 +1,9 @@
-import { isSVGElement, hasUseElement, ERROR_NOT_SVG_ELEMENT } from './checkers';
+import { ERROR_NOT_SVG_ELEMENT, hasUseElement, isSVGElement } from './checkers';
 import { serializeSVGNode } from './helpers';
 import {
   convertDimensionsToViewBox,
-  removeStyleAttribute,
   removeClassAttribute,
+  removeStyleAttribute,
   updateSVGFillColors,
 } from './modifiers';
 
