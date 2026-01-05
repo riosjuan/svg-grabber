@@ -13,19 +13,75 @@ const getElements = () => ({
 });
 
 // Helper Functions
+const sanitizeSvgForPreview = (svg) => {
+  try {
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svg, 'image/svg+xml');
+    const svgElement = svgDoc.documentElement;
+
+    if (svgElement.tagName === 'parsererror') {
+      return '';
+    }
+
+    svgElement.querySelectorAll('script, foreignObject').forEach((node) => {
+      node.remove();
+    });
+
+    const walker = svgDoc.createTreeWalker(svgElement, NodeFilter.SHOW_ELEMENT);
+    let currentNode = walker.currentNode;
+
+    while (currentNode) {
+      Array.from(currentNode.attributes).forEach((attribute) => {
+        if (/^on/i.test(attribute.name)) {
+          currentNode.removeAttribute(attribute.name);
+          return;
+        }
+
+        if (
+          (attribute.name === 'href' || attribute.name === 'xlink:href') &&
+          /^\s*javascript:/i.test(attribute.value)
+        ) {
+          currentNode.removeAttribute(attribute.name);
+        }
+      });
+
+      currentNode = walker.nextNode();
+    }
+
+    return svgElement.outerHTML;
+  } catch (error) {
+    console.error('Failed to sanitize SVG for preview:', error);
+    return '';
+  }
+};
+
+const toSafeFilename = (value) => (value || 'svg').replace(/[^\w.-]+/g, '-');
+
 const createSvgCard = (svg, sender, index) => {
   const element = document.createElement('div');
   const base64doc = btoa(unescape(encodeURIComponent(svg)));
-  element.innerHTML = `
-    <div class="svg-card__content">
-      ${svg}
-    </div>
-    <div class="svg-card__actions">
-      <button class='copy'>Copy</button>
-      <a download="${sender}-${index}.svg" href='data:text/svg;base64,${base64doc}'>Download</a>
-    </div>
-  `;
   element.classList.add('svg-card');
+  element.dataset.rawSvg = svg;
+
+  const content = document.createElement('div');
+  content.classList.add('svg-card__content');
+  content.innerHTML = sanitizeSvgForPreview(svg);
+
+  const actions = document.createElement('div');
+  actions.classList.add('svg-card__actions');
+
+  const copyButton = document.createElement('button');
+  copyButton.classList.add('copy');
+  copyButton.type = 'button';
+  copyButton.textContent = 'Copy';
+
+  const downloadLink = document.createElement('a');
+  downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
+  downloadLink.href = `data:text/svg;base64,${base64doc}`;
+  downloadLink.textContent = 'Download';
+
+  actions.append(copyButton, downloadLink);
+  element.append(content, actions);
   return element;
 };
 
@@ -39,13 +95,12 @@ const showNotification = (notification) => {
 
 // Main Functions
 export const setSvgUrl = (data, sender, pageUrl) => {
-  const { header, senderLink, svgGallery, downloadAllButtons, disclaimer } =
-    getElements();
+  const { header, senderLink, svgGallery, downloadAllButtons, disclaimer } = getElements();
 
   // Update header and sender link
-  if (header) header.innerHTML = `All SVGs from &#8594; ${sender}`;
+  if (header) header.textContent = `All SVGs from → ${sender}`;
   if (senderLink) {
-    senderLink.innerHTML = pageUrl.replace(/\/$/, '');
+    senderLink.textContent = pageUrl.replace(/\/$/, '');
     senderLink.href = pageUrl;
   }
 
@@ -54,11 +109,9 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 
   if (data.length === 0) {
     // Handle case when no SVGs are found
-    if (header) header.innerHTML = `No SVGs in &#8594; ${sender}`;
+    if (header) header.textContent = `No SVGs in → ${sender}`;
     downloadAllButtons.forEach((button) => button.classList.add('hidden'));
-    if (disclaimer)
-      disclaimer.innerHTML =
-        'It seems that this site does not use any SVGs. 🙃';
+    if (disclaimer) disclaimer.textContent = 'It seems that this site does not use any SVGs. 🙃';
   } else {
     // Create and append SVG cards
     data.forEach((svg, index) => {
@@ -76,15 +129,15 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 const copySvg = (event) => {
   const { notification } = getElements();
   const svgCard = event.target.closest('.svg-card');
-  const svg = svgCard?.querySelector('svg');
+  const rawSvg = svgCard?.dataset.rawSvg;
 
-  if (!svg) {
-    console.error('SVG element not found');
+  if (!rawSvg) {
+    console.error('SVG content not found');
     return;
   }
 
   navigator.clipboard
-    .writeText(svg.outerHTML)
+    .writeText(rawSvg)
     .then(() => showNotification(notification))
     .catch((err) => console.error('Failed to copy text: ', err));
 };
