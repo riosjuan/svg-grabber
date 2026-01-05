@@ -1,41 +1,5 @@
 import { isSVGElement } from './checkers';
 
-export const updateSVGFillColors = (svgNode) => {
-  try {
-    isSVGElement(svgNode);
-    const pathElements = svgNode.querySelectorAll('path');
-    if (pathElements.length === 0) {
-      return false; // No path elements found
-    }
-
-    let allWhite = true;
-
-    const isWhite = (color) => {
-      return /^(#fff(?:fff)?|white)$/i.test(color);
-    };
-
-    pathElements.forEach((pathElement) => {
-      const fillAttribute = pathElement.getAttribute('fill');
-
-      if (!fillAttribute || !isWhite(fillAttribute)) {
-        allWhite = false;
-      }
-    });
-
-    if (allWhite) {
-      pathElements.forEach((pathElement) => {
-        pathElement.setAttribute('fill', 'currentColor');
-      });
-      return true;
-    }
-
-    return false;
-  } catch (error) {
-    console.error('Error checking and modifying path SVG:', error);
-    return false;
-  }
-};
-
 export const convertDimensionsToViewBox = (svgNode) => {
   try {
     isSVGElement(svgNode);

@@ -4,7 +4,6 @@ import {
   convertDimensionsToViewBox,
   removeClassAttribute,
   removeStyleAttribute,
-  updateSVGFillColors,
 } from './modifiers';
 
 export const removeDuplicateSVGs = (svgNodes) => {
@@ -37,7 +36,6 @@ const processSVGNode = (node) => {
     convertDimensionsToViewBox(clonedNode);
     removeClassAttribute(clonedNode);
     removeStyleAttribute(clonedNode);
-    updateSVGFillColors(clonedNode);
     return clonedNode;
   } catch (error) {
     console.error('Error processing SVG node:', error);
@@ -47,10 +45,7 @@ const processSVGNode = (node) => {
 
 export const processInlineSVGs = () => {
   try {
-    const svgNodes = Array.from(
-      document.querySelectorAll('svg'),
-      processSVGNode
-    ).filter(Boolean);
+    const svgNodes = Array.from(document.querySelectorAll('svg'), processSVGNode).filter(Boolean);
     return removeDuplicateSVGs(svgNodes);
   } catch (error) {
     console.error('Error processing inline SVGs:', error);

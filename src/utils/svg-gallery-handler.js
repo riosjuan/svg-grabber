@@ -8,6 +8,7 @@ const getElements = () => ({
   senderLink: document.getElementById('sender-url'),
   svgGallery: document.getElementById('gallery-svg'),
   downloadAllButtons: document.querySelectorAll('.btn-download-all'),
+  previewControls: document.querySelector('.preview-controls'),
   disclaimer: document.querySelector('.disclaimer'),
   notification: document.querySelector('.notification'),
 });
@@ -95,7 +96,8 @@ const showNotification = (notification) => {
 
 // Main Functions
 export const setSvgUrl = (data, sender, pageUrl) => {
-  const { header, senderLink, svgGallery, downloadAllButtons, disclaimer } = getElements();
+  const { header, senderLink, svgGallery, downloadAllButtons, previewControls, disclaimer } =
+    getElements();
 
   // Update header and sender link
   if (header) header.textContent = `All SVGs from → ${sender}`;
@@ -111,6 +113,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
     // Handle case when no SVGs are found
     if (header) header.textContent = `No SVGs in → ${sender}`;
     downloadAllButtons.forEach((button) => button.classList.add('hidden'));
+    if (previewControls) previewControls.classList.add('hidden');
     if (disclaimer) disclaimer.textContent = 'It seems that this site does not use any SVGs. 🙃';
   } else {
     // Create and append SVG cards
@@ -123,6 +126,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 
     // Show 'Download All' buttons
     downloadAllButtons.forEach((button) => button.classList.remove('hidden'));
+    if (previewControls) previewControls.classList.remove('hidden');
   }
 };
 

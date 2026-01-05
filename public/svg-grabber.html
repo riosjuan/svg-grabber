@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,7 +27,7 @@
         </div>
         <p class="logo__text">&lt;svg&gt;grabber</p>
       </div>
-      <button class="btn-download-all btn-download-all--hidden fade-in">
+      <button class="btn-download-all btn-download-all--hidden hidden fade-in">
         <div class="button-icon">
           Download all SVGs
           <div class="icon-small icon-right">
@@ -47,12 +47,23 @@
         <h1 id="header"></h1>
         <a id="sender-url" class="sender-url" href=""></a>
         <p class="disclaimer">
-          Some of the logos design and the artwork you are about to download are
-          the intellectual property of the copyright and/or trademark holder and
-          are offered to you as a convenience for lawful use with proper
-          permission from the copyright and/or trademark holder only.
+          Some of the logos design and the artwork you are about to download are the intellectual
+          property of the copyright and/or trademark holder and are offered to you as a convenience
+          for lawful use with proper permission from the copyright and/or trademark holder only.
         </p>
-        <button class="btn-download-all">
+        <div class="preview-controls hidden">
+          <label for="preview-bg"> Preview background </label>
+          <input
+            id="preview-bg"
+            type="range"
+            min="90"
+            max="100"
+            value="100"
+            step="1"
+            aria-label="Preview background brightness"
+          />
+        </div>
+        <button class="btn-download-all hidden">
           <div class="button-icon">
             Download all SVGs
             <div class="icon-small icon-right">
@@ -70,9 +81,7 @@
       <input class="clipboard hidden" />
     </div>
 
-    <footer class="footer">
-      by <a href="https://x.com/juanriosnl">@juanriosnl</a>
-    </footer>
+    <footer class="footer">by <a href="https://x.com/juanriosnl">@juanriosnl</a></footer>
 
     <div class="notification">
       <div class="icon icon-left">
