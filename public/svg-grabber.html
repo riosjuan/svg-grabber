@@ -27,30 +27,9 @@
         </div>
         <p class="logo__text">&lt;svg&gt;grabber</p>
       </div>
-      <button class="btn-download-all btn-download-all--hidden hidden fade-in">
-        <div class="button-icon">
-          Download all SVGs
-          <div class="icon-small icon-right">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92">
-              <path
-                fill="currentColor"
-                d="M89 58.8V86c0 2.8-2.2 5-5 5H8c-2.8 0-5-2.2-5-5V58.8c0-2.8 2.2-5 5-5s5 2.2 5 5V81h66V58.8c0-2.8 2.2-5 5-5s5 2.2 5 5zM42.4 65c.9 1 2.2 1.5 3.6 1.5s2.6-.5 3.6-1.5l19.9-20.4c1.9-2 1.9-5.1-.1-7.1-2-1.9-5.1-1.9-7.1.1L51 49.3V6c0-2.8-2.2-5-5-5s-5 2.2-5 5v43.3L29.6 37.7c-1.9-2-5.1-2-7.1-.1s-2 5.1-.1 7.1l20 20.3z"
-              />
-            </svg>
-          </div>
-        </div>
-      </button>
-    </header>
-
-    <div class="container">
-      <div class="svg-source-info">
-        <h1 id="header"></h1>
-        <a id="sender-url" class="sender-url" href=""></a>
-        <p class="disclaimer">
-          Some of the logos design and the artwork you are about to download are the intellectual
-          property of the copyright and/or trademark holder and are offered to you as a convenience
-          for lawful use with proper permission from the copyright and/or trademark holder only.
-        </p>
+      <div class="header-divider"></div>
+      <a id="sender-url" class="sender-url" href=""></a>
+      <div class="controls">
         <div class="preview-controls hidden">
           <label for="preview-bg"> Preview background </label>
           <input
@@ -77,23 +56,22 @@
           </div>
         </button>
       </div>
+    </header>
+
+    <div class="container">
+      <div class="svg-source-info">
+        <h1 id="header"></h1>
+        <p class="disclaimer">
+          Some of the logos design and the artwork you are about to download are the intellectual
+          property of the copyright and/or trademark holder and are offered to you as a convenience
+          for lawful use with proper permission from the copyright and/or trademark holder only.
+        </p>
+      </div>
       <div id="gallery-svg" class="grid-svg"></div>
       <input class="clipboard hidden" />
     </div>
 
     <footer class="footer">by <a href="https://x.com/juanriosnl">@juanriosnl</a></footer>
-
-    <div class="notification">
-      <div class="icon icon-left">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92">
-          <path
-            fill="currentColor"
-            d="M34.4 72c-1.2 0-2.3-.4-3.2-1.3L11.3 50.8c-1.8-1.8-1.8-4.6 0-6.4 1.8-1.8 4.6-1.8 6.4 0l16.8 16.7 39.9-39.8c1.8-1.8 4.6-1.8 6.4 0 1.8 1.8 1.8 4.6 0 6.4l-43.1 43c-1 .9-2.1 1.3-3.3 1.3z"
-          />
-        </svg>
-      </div>
-      <p>SVG code copied!</p>
-    </div>
     <script type="module" src="svg-manager.js"></script>
   </body>
 </html>

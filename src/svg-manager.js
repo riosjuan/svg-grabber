@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { setSvgUrl, setupCopyButtons, setupScrollBasedButtonVisibility } from './utils';
+import { setSvgUrl, setupCopyButtons } from './utils';
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
@@ -47,7 +47,6 @@ const initializePage = () => {
   if (previewControls) previewControls.classList.add('hidden');
   setupDownloadAllButton();
   setupCopyButtons();
-  setupScrollBasedButtonVisibility();
   setupPreviewBackgroundControl();
 
   chrome.runtime.onMessage.addListener((message) => {

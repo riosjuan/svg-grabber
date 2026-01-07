@@ -1,6 +1,5 @@
 // Constants
-const NOTIFICATION_ACTIVE_CLASS = 'notification--active';
-const NOTIFICATION_ACTIVE_DURATION = 1500;
+const COPY_BUTTON_FEEDBACK_DURATION = 2000;
 
 // DOM Element Selectors
 const getElements = () => ({
@@ -86,12 +85,24 @@ const createSvgCard = (svg, sender, index) => {
   return element;
 };
 
-const showNotification = (notification) => {
-  if (!notification) return;
-  notification.classList.add(NOTIFICATION_ACTIVE_CLASS);
-  setTimeout(() => {
-    notification.classList.remove(NOTIFICATION_ACTIVE_CLASS);
-  }, NOTIFICATION_ACTIVE_DURATION);
+const showCopyButtonFeedback = (button) => {
+  if (!button) return;
+
+  if (!button.dataset.originalText) {
+    button.dataset.originalText = button.textContent;
+  }
+
+  button.textContent = 'Copied!';
+
+  const existingTimeoutId = Number(button.dataset.resetTimeoutId);
+  if (existingTimeoutId) clearTimeout(existingTimeoutId);
+
+  const timeoutId = window.setTimeout(() => {
+    button.textContent = button.dataset.originalText || 'Copy';
+    delete button.dataset.resetTimeoutId;
+  }, COPY_BUTTON_FEEDBACK_DURATION);
+
+  button.dataset.resetTimeoutId = String(timeoutId);
 };
 
 // Main Functions
@@ -131,7 +142,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 };
 
 const copySvg = (event) => {
-  const { notification } = getElements();
+  const copyButton = event.target.closest('button.copy');
   const svgCard = event.target.closest('.svg-card');
   const rawSvg = svgCard?.dataset.rawSvg;
 
@@ -142,7 +153,9 @@ const copySvg = (event) => {
 
   navigator.clipboard
     .writeText(rawSvg)
-    .then(() => showNotification(notification))
+    .then(() => {
+      showCopyButtonFeedback(copyButton);
+    })
     .catch((err) => console.error('Failed to copy text: ', err));
 };
 

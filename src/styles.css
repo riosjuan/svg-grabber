@@ -87,11 +87,17 @@ body {
   border-bottom: 1px solid var(--color-border);
   padding: 1rem 1.5rem;
   position: sticky;
-  justify-content: space-between;
   top: 0;
   left: 0;
   right: 0;
   box-shadow: var(--header-box-shadow);
+  gap: 1.5rem;
+}
+
+.header-divider {
+  height: 2.5rem;
+  width: 1px;
+  background-color: var(--color-border);
 }
 
 .container {
@@ -139,10 +145,6 @@ h1 {
 .btn-download-all:focus {
   color: var(--color-button-text);
   background-color: var(--color-button-hover);
-}
-
-.btn-download-all--hidden {
-  display: none;
 }
 
 .button-icon {
@@ -260,11 +262,20 @@ h1 {
   margin-bottom: 6rem;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  color: var(--color-text-secondary);
+  margin-inline-start: auto;
+}
+
 .preview-controls {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin: 1.5rem 0;
   color: var(--color-text-secondary);
 }
 
@@ -310,20 +321,4 @@ button:focus,
 a:hover,
 a:focus {
   color: var(--color-button-hover);
-}
-
-/* 12. Animations */
-.fade-in {
-  animation: fadeIn 250ms cubic-bezier(0.45, 0, 0.55, 1);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    scale: 0.8;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
 }
