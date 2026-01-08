@@ -72,11 +72,12 @@ const createSvgCard = (svg, sender, index) => {
   actions.classList.add('svg-card__actions');
 
   const copyButton = document.createElement('button');
-  copyButton.classList.add('copy');
+  copyButton.classList.add('btn', 'copy');
   copyButton.type = 'button';
   copyButton.textContent = 'Copy';
 
   const downloadLink = document.createElement('a');
+  downloadLink.classList.add('btn');
   downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
   downloadLink.href = `data:text/svg;base64,${base64doc}`;
   downloadLink.textContent = 'Download';

@@ -1,0 +1,15 @@
+@layer layout {
+  .layout-grid {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .svg-grid {
+    align-content: stretch;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
+    grid-template-rows: auto;
+  }
+}

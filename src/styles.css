@@ -1,22 +1,23 @@
-@layer reset, tokens, base;
+@layer reset, tokens, base, components, layout;
 
 @import url('./styles/reset.css') layer(reset);
 @import url('./styles/tokens.css') layer(tokens);
 @import url('./styles/base.css') layer(base);
+@import url('./styles/components.css') layer(components);
+@import url('./styles/layout.css') layer(layout);
 
 /* 3. Layout Components */
 .header {
-  display: flex;
   align-items: center;
-  background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-canvas);
+  border-block-end: 1px solid var(--color-border);
+  display: flex;
+  gap: 1.5rem;
+  left: 0;
   padding: 1rem 1.5rem;
   position: sticky;
-  top: 0;
-  left: 0;
   right: 0;
-  box-shadow: var(--header-box-shadow);
-  gap: 1.5rem;
+  top: 0;
 }
 
 .header-divider {
@@ -48,7 +49,7 @@ h1 {
   align-items: flex-start;
   gap: 1rem;
   max-width: 34em;
-  padding: 0.75rem 1rem;
+  padding: 1.5rem;
   border-radius: var(--border-radius);
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -56,103 +57,15 @@ h1 {
 }
 
 .disclaimer {
-  color: var(--color-text-tertiary);
+  color: var(--color-ink);
   font-size: 0.85rem;
   font-weight: 300;
   line-height: 1.5;
   margin: 0;
 }
 
-.disclaimer-dismiss {
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.disclaimer-dismiss:hover {
-  background-color: var(--color-border);
-}
-
 .sender-url {
   overflow-wrap: anywhere;
-}
-
-/* 5. Buttons */
-.btn-download-all {
-  color: var(--color-button-text);
-  background-color: var(--color-button);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-duration) ease-in-out;
-  font-size: var(--font-size);
-}
-
-.btn-download-all:hover,
-.btn-download-all:focus {
-  color: var(--color-button-text);
-  background-color: var(--color-button-hover);
-}
-
-.button-icon {
-  display: flex;
-  align-items: baseline;
-}
-
-/* 6. Cards */
-.svg-card {
-  background-color: var(--color-card);
-  border-radius: calc(var(--border-radius) * 2);
-  box-shadow: 0 0 1px 0 hsl(0deg 0% 0% / 25%);
-  color: var(--color-text);
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  max-width: var(--max-card-width);
-  padding: 1.5rem;
-}
-
-.svg-card__content {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-block-end: 2rem;
-  background-color: var(--svg-preview-bg);
-  border-radius: calc(var(--border-radius) * 0.75);
-
-  svg {
-    aspect-ratio: 1;
-    height: 100%;
-    width: 100%;
-  }
-}
-
-.svg-card__actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* 7. Icons */
-.icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.icon-small {
-  width: 1rem;
-  height: 1rem;
-}
-
-.icon-left {
-  margin-right: 1rem;
-}
-
-.icon-right {
-  margin-left: 1rem;
 }
 
 /* 9. Utility Classes */
@@ -161,24 +74,6 @@ h1 {
 }
 
 /* 10. Specific Component Styles */
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo__icon {
-  color: var(--color-text);
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: 0.5rem;
-}
-
-.logo__text {
-  color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
 
 .svg-source-info {
   margin-bottom: 6rem;
@@ -210,13 +105,5 @@ h1 {
   height: 0.25rem;
   width: min(8rem, 100%);
   appearance: none;
-  color: var(--color-primary);
-}
-
-.grid-svg {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
-  grid-template-rows: auto;
-  gap: 1.5rem;
-  align-content: stretch;
+  color: var(--color-accent);
 }

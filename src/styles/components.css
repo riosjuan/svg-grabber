@@ -1,0 +1,99 @@
+@layer components {
+  .btn {
+    align-items: center;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink);
+    column-gap: 1ch;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: var(--font-size);
+    font-weight: var(--font-weight-semi-bold);
+    justify-content: center;
+    line-height: 1.3em;
+    padding: calc(var(--block-spacing) / 4) var(--inline-spacing);
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  .btn-accent {
+    color: var(--color-ink-inverse);
+    background-color: var(--color-accent);
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-accent-hover);
+    }
+  }
+
+  .btn-icon {
+    border: none;
+    min-inline-size: 2rem;
+    min-block-size: 2rem;
+  }
+
+  .btn-large {
+    padding: 0 calc(var(--inline-spacing) * 2);
+    min-height: 2.5rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .logo__text {
+    color: var(--color-ink-strong);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.05em;
+  }
+
+  .svg-card {
+    background-color: var(--color-paper);
+    border-radius: calc(var(--border-radius) * 2);
+    box-shadow: 0 0 1px 0 var(--color-border);
+    color: var(--color-text);
+    display: flex;
+    flex-flow: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    max-width: var(--max-card-width);
+    padding: 1.5rem;
+  }
+
+  .svg-card__content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: var(--svg-preview-bg);
+    border-radius: calc(var(--border-radius) * 0.75);
+
+    svg {
+      aspect-ratio: 1;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .svg-card__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
