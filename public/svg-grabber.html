@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>&lt;svg&gt;grabber</title>
+    <title>svg-grabber</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
 
@@ -25,7 +25,7 @@
             </g>
           </svg>
         </div>
-        <p class="logo__text">&lt;svg&gt;grabber</p>
+        <p class="logo__text">svg-grabber</p>
       </div>
       <div class="header-divider"></div>
       <a id="sender-url" class="sender-url" href=""></a>
@@ -59,13 +59,36 @@
     </header>
 
     <div class="container">
-      <div class="svg-source-info">
-        <h1 id="header"></h1>
+      <div class="disclaimer-alert" role="alert">
         <p class="disclaimer">
           Some of the logos design and the artwork you are about to download are the intellectual
           property of the copyright and/or trademark holder and are offered to you as a convenience
           for lawful use with proper permission from the copyright and/or trademark holder only.
         </p>
+        <button class="disclaimer-dismiss" type="button" aria-label="Dismiss disclaimer">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
       <div id="gallery-svg" class="grid-svg"></div>
       <input class="clipboard hidden" />

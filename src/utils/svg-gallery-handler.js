@@ -9,7 +9,8 @@ const getElements = () => ({
   downloadAllButtons: document.querySelectorAll('.btn-download-all'),
   previewControls: document.querySelector('.preview-controls'),
   disclaimer: document.querySelector('.disclaimer'),
-  notification: document.querySelector('.notification'),
+  disclaimerAlert: document.querySelector('.disclaimer-alert'),
+  disclaimerDismiss: document.querySelector('.disclaimer-dismiss'),
 });
 
 // Helper Functions
@@ -165,5 +166,14 @@ export const setupCopyButtons = () => {
     if (event.target.classList.contains('copy')) {
       copySvg(event);
     }
+  });
+};
+
+export const setupDisclaimerAlert = () => {
+  const { disclaimerAlert, disclaimerDismiss } = getElements();
+  if (!disclaimerAlert || !disclaimerDismiss) return;
+
+  disclaimerDismiss.addEventListener('click', () => {
+    disclaimerAlert.classList.add('hidden');
   });
 };

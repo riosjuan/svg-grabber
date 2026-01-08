@@ -1,83 +1,8 @@
-/* 1. CSS Variables */
-:root {
-  /* Base colors */
-  --white: rgba(255, 255, 255, 1);
-  --blue: rgba(47, 44, 248, 1);
-  --blue-hover: rgba(105, 44, 248, 1);
-  --background-gray: hsl(200, 23%, 97%);
-  --text-dark: rgba(29, 29, 37, 1);
-  --text-medium: rgba(72, 73, 77, 1);
-  --text-light: rgba(117, 119, 124, 1);
-  --border-gray: rgba(231, 232, 235, 1);
+@layer reset, tokens, base;
 
-  /* Semantic and Component colors */
-  --color-primary: var(--blue);
-  --color-primary-hover: var(--blue-hover);
-  --color-background: var(--background-gray);
-  --color-text: var(--text-dark);
-  --color-text-secondary: var(--text-medium);
-  --color-text-tertiary: var(--text-light);
-  --color-border: var(--border-gray);
-  --color-card: var(--white);
-  --color-button: var(--color-primary);
-  --color-button-hover: var(--color-primary-hover);
-  --color-button-text: var(--white);
-  --color-notification: var(--color-primary);
-  --svg-preview-bg: hsl(210, 20%, 100%);
-
-  /* Typography */
-  --font-size: 16px;
-  --small-font-size: 0.85rem;
-  --h1-font-size: 1.25rem;
-
-  /* Layout */
-  --border-radius: 0.25rem;
-  --transition-duration: 0.25s;
-
-  /* Shadows */
-  --shadow-color: 200deg 15% 72%;
-  --shadow-elevation-low:
-    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
-    0.4px 0.8px 1.1px -1px hsl(var(--shadow-color) / 0.21),
-    0.8px 1.7px 2.3px -2px hsl(var(--shadow-color) / 0.24);
-  --shadow-elevation-medium:
-    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.19),
-    0.8px 1.6px 2.1px -0.7px hsl(var(--shadow-color) / 0.21),
-    1.8px 3.6px 4.8px -1.3px hsl(var(--shadow-color) / 0.24),
-    4.2px 8.4px 11.3px -2px hsl(var(--shadow-color) / 0.26);
-  --shadow-elevation-high:
-    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.18),
-    1.2px 2.4px 3.2px -0.3px hsl(var(--shadow-color) / 0.19),
-    2.2px 4.3px 5.8px -0.6px hsl(var(--shadow-color) / 0.2),
-    3.4px 6.7px 9px -0.9px hsl(var(--shadow-color) / 0.21),
-    5.1px 10.3px 13.8px -1.1px hsl(var(--shadow-color) / 0.22),
-    7.8px 15.6px 20.9px -1.4px hsl(var(--shadow-color) / 0.23),
-    11.5px 23.1px 31px -1.7px hsl(var(--shadow-color) / 0.24),
-    16.8px 33.5px 45px -2px hsl(var(--shadow-color) / 0.25);
-  --header-box-shadow: var(--shadow-elevation-low);
-  --card-box-shadow: var(--shadow-elevation-medium);
-  --notification-box-shadow: var(--shadow-elevation-medium);
-
-  /* Others */
-  --max-card-width: 16rem;
-}
-
-/* 2. Global Styles */
-body {
-  background-color: var(--color-background);
-  display: grid;
-  min-height: 100vh;
-  grid-template-rows: auto 1fr auto;
-  color: var(--color-text);
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
-  font-size: var(--font-size);
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('./styles/reset.css') layer(reset);
+@import url('./styles/tokens.css') layer(tokens);
+@import url('./styles/base.css') layer(base);
 
 /* 3. Layout Components */
 .header {
@@ -118,13 +43,39 @@ h1 {
   margin-bottom: 0.25rem;
 }
 
+.disclaimer-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 34em;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
 .disclaimer {
-  max-width: 28em;
   color: var(--color-text-tertiary);
   font-size: 0.85rem;
   font-weight: 300;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin: 0;
+}
+
+.disclaimer-dismiss {
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.disclaimer-dismiss:hover {
+  background-color: var(--color-border);
 }
 
 .sender-url {
@@ -155,14 +106,14 @@ h1 {
 /* 6. Cards */
 .svg-card {
   background-color: var(--color-card);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-box-shadow);
+  border-radius: calc(var(--border-radius) * 2);
+  box-shadow: 0 0 1px 0 hsl(0deg 0% 0% / 25%);
   color: var(--color-text);
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   max-width: var(--max-card-width);
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .svg-card__content {
@@ -202,35 +153,6 @@ h1 {
 
 .icon-right {
   margin-left: 1rem;
-}
-
-/* 8. Notifications */
-.notification {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  background-color: var(--color-notification);
-  color: var(--color-button-text);
-  padding: 1rem 1.5rem;
-  border-radius: calc(var(--border-radius) * 2);
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 10;
-  opacity: 0;
-  box-shadow: var(--notification-box-shadow);
-  transition:
-    opacity var(--transition-duration) ease-in-out,
-    transform var(--transition-duration) ease-in-out;
-  transform: translateX(240px);
-
-  &.notification--active {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  & p {
-    margin: 0;
-  }
 }
 
 /* 9. Utility Classes */
@@ -284,41 +206,17 @@ h1 {
 }
 
 .preview-controls input[type='range'] {
-  width: min(18rem, 100%);
+  background-color: var(--color-border);
+  height: 0.25rem;
+  width: min(8rem, 100%);
+  appearance: none;
+  color: var(--color-primary);
 }
 
 .grid-svg {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
   grid-template-rows: auto;
-  grid-column-gap: 2.5rem;
-  grid-row-gap: 2.5rem;
+  gap: 1.5rem;
   align-content: stretch;
-}
-
-/* 11. Generic Element Styles */
-button {
-  background: none;
-  outline: none;
-  border: none;
-  font-size: var(--font-size);
-}
-
-a {
-  text-decoration: none;
-}
-
-button,
-a {
-  color: var(--color-button);
-  cursor: pointer;
-  transition: color var(--transition-duration) ease-in-out;
-  font-weight: 500;
-}
-
-button:hover,
-button:focus,
-a:hover,
-a:focus {
-  color: var(--color-button-hover);
 }

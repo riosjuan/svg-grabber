@@ -1,0 +1,39 @@
+@layer base {
+  body {
+    background-color: var(--color-background);
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    color: var(--color-text);
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+      'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    font-size: var(--font-size);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration-thickness: from-font;
+    text-decoration-skip-ink: auto;
+  }
+
+  a:hover {
+    color: var(--color-primary-hover);
+  }
+
+  :is(a, button) {
+    touch-action: manipulation;
+    transition-property: background-color, border-color, box-shadow, filter, outline;
+    transition: 0.1s ease-out;
+  }
+
+  :is(a, button):where(:focus-visible) {
+    border-radius: var(--border-radius);
+    outline: var(--focus-ring-size, 2px) solid var(--color-primary-hover);
+    outline-offset: var(--focus-ring-offset, 1px);
+  }
+}
