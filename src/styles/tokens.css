@@ -2,16 +2,21 @@
   :root {
     color-scheme: light dark;
 
-    --h-blue: 265;
-    --lch-blue: 46% 0.3 var(--h-blue);
-    --lch-blue-dark: 20% 0.3 var(--h-blue);
-    --lch-blue-light: 96% 0.1 var(--h-blue);
-    --lch-blue-lighter: 100% 0.02 var(--h-blue);
+    --lch-blue-darkest: 26% 0.126 264;
+    --lch-blue-darker: 40% 0.166 262;
+    --lch-blue-dark: 57.02% 0.1895 260.46;
+    --lch-blue-medium: 46% 0.3 265;
+    --lch-blue-light: 84.04% 0.0719 255.29;
+    --lch-blue-lighter: 92% 0.026 254;
+    --lch-blue-lightest: 96% 0.016 252;
 
     --lch-gray: 50% 0% 0;
     --lch-gray-dark: 30% 0% 0;
     --lch-gray-light: 70% 0% 0;
     --lch-gray-lighter: 97% 0% 0;
+
+    --h-green: 145;
+    --lch-green: 56% 0.3 var(--h-green);
 
     --lch-white: 100% 0% 0;
 
@@ -26,8 +31,10 @@
 
     --color-hover: oklch(var(--lch-gray-light) / 0.25);
 
-    --color-accent: oklch(var(--lch-blue));
-    --color-accent-hover: oklch(var(--lch-blue) / 0.8);
+    --color-accent: oklch(var(--lch-blue-medium));
+    --color-accent-hover: oklch(var(--lch-blue-medium) / 0.8);
+
+    --color-success: oklch(var(--lch-green));
 
     --svg-preview-bg: oklch(70% 0% 0);
 

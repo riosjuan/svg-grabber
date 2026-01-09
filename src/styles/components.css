@@ -37,8 +37,20 @@
 
   .btn-icon {
     border: none;
-    min-inline-size: 2rem;
-    min-block-size: 2rem;
+    padding: 0.25rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .btn-icon.is-success {
+    pointer-events: none;
+
+    svg {
+      color: var(--color-success);
+    }
   }
 
   .btn-large {

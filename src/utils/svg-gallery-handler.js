@@ -1,5 +1,7 @@
+import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
+
 // Constants
-const COPY_BUTTON_FEEDBACK_DURATION = 2000;
+const COPY_BUTTON_FEEDBACK_DURATION = 1500;
 
 // DOM Element Selectors
 const getElements = () => ({
@@ -72,15 +74,17 @@ const createSvgCard = (svg, sender, index) => {
   actions.classList.add('svg-card__actions');
 
   const copyButton = document.createElement('button');
-  copyButton.classList.add('btn', 'copy');
+  copyButton.classList.add('btn', 'btn-icon', 'copy');
   copyButton.type = 'button';
-  copyButton.textContent = 'Copy';
+  copyButton.setAttribute('aria-label', 'Copy SVG');
+  copyButton.innerHTML = copyIcon;
 
   const downloadLink = document.createElement('a');
-  downloadLink.classList.add('btn');
+  downloadLink.classList.add('btn', 'btn-icon');
   downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
   downloadLink.href = `data:text/svg;base64,${base64doc}`;
-  downloadLink.textContent = 'Download';
+  downloadLink.setAttribute('aria-label', 'Download SVG');
+  downloadLink.innerHTML = downloadIcon;
 
   actions.append(copyButton, downloadLink);
   element.append(content, actions);
@@ -89,18 +93,46 @@ const createSvgCard = (svg, sender, index) => {
 
 const showCopyButtonFeedback = (button) => {
   if (!button) return;
-
-  if (!button.dataset.originalText) {
-    button.dataset.originalText = button.textContent;
+  const icon = button.querySelector('svg');
+  const label = button.querySelector('span');
+  if (!button.dataset.originalIcon && icon) {
+    button.dataset.originalIcon = icon.outerHTML;
   }
 
-  button.textContent = 'Copied!';
+  if (!button.dataset.originalText && label) {
+    button.dataset.originalText = label.textContent;
+  }
+
+  if (icon) {
+    icon.outerHTML = checkmarkIcon;
+  }
+
+  button.classList.add('is-success');
+
+  if (label) {
+    label.textContent = '';
+    label.hidden = true;
+  }
 
   const existingTimeoutId = Number(button.dataset.resetTimeoutId);
   if (existingTimeoutId) clearTimeout(existingTimeoutId);
 
   const timeoutId = window.setTimeout(() => {
-    button.textContent = button.dataset.originalText || 'Copy';
+    if (button.dataset.originalIcon) {
+      const currentIcon = button.querySelector('svg');
+      if (currentIcon) {
+        currentIcon.outerHTML = button.dataset.originalIcon;
+      } else {
+        button.insertAdjacentHTML('afterbegin', button.dataset.originalIcon);
+      }
+    }
+
+    if (label) {
+      label.textContent = button.dataset.originalText || 'Copy';
+      label.hidden = false;
+    }
+
+    button.classList.remove('is-success');
     delete button.dataset.resetTimeoutId;
   }, COPY_BUTTON_FEEDBACK_DURATION);
 
@@ -164,7 +196,7 @@ const copySvg = (event) => {
 // Event Listeners
 export const setupCopyButtons = () => {
   document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('copy')) {
+    if (event.target.closest('button.copy')) {
       copySvg(event);
     }
   });
