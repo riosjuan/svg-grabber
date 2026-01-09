@@ -38,6 +38,7 @@
   .btn-icon {
     border: none;
     padding: 0.25rem;
+    color: inherit;
 
     svg {
       width: 1.5rem;

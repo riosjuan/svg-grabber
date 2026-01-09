@@ -51,13 +51,14 @@ h1 {
   max-width: 34em;
   padding: 1.5rem;
   border-radius: var(--border-radius);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-alert-background);
+  border: 1px solid var(--color-alert-border);
   margin-bottom: 2rem;
+  color: var(--color-alert-text);
 }
 
 .disclaimer {
-  color: var(--color-ink);
+  color: inherit;
   font-size: 0.85rem;
   font-weight: 300;
   line-height: 1.5;

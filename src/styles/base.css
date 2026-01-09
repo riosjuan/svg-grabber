@@ -19,6 +19,11 @@
     letter-spacing: var(--letter-spacing);
   }
 
+  p {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight-regular);
+  }
+
   a {
     color: var(--color-accent);
     text-decoration-thickness: from-font;
