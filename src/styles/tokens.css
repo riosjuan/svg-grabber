@@ -29,6 +29,7 @@
     --color-ink-inverse: oklch(var(--lch-white));
     --color-border: oklch(var(--lch-ink-darkest) / 0.15);
     --color-hover: oklch(var(--lch-ink-lighter) / 0.25);
+    --color-selection: oklch(var(--lch-blue) / 0.25);
 
     --color-accent: oklch(var(--lch-blue));
     --color-accent-hover: oklch(from oklch(var(--lch-blue)) calc(l + 0.12) c h);
