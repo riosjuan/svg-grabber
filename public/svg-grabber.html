@@ -31,7 +31,7 @@
       <a id="sender-url" class="sender-url" href=""></a>
       <div class="controls">
         <div class="preview-controls hidden">
-          <label for="preview-bg"> Preview background </label>
+          <span class="preview-controls__label">Light</span>
           <input
             id="preview-bg"
             type="range"
@@ -41,6 +41,7 @@
             step="1"
             aria-label="Preview background brightness"
           />
+          <span class="preview-controls__label">Dark</span>
         </div>
         <button class="btn btn-accent btn-large hidden btn-download-all">
           Download all SVGs
@@ -89,14 +90,19 @@
           aria-label="Dismiss disclaimer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6 6 18M6 6l12 12"/>
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M18 6 6 18M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
       <div id="gallery-svg" class="svg-grid"></div>
       <input class="clipboard hidden" />
-    <main/>
-
+    </main>
     <footer class="footer">by <a href="https://x.com/juanriosnl">@juanriosnl</a></footer>
     <script type="module" src="svg-manager.js"></script>
   </body>

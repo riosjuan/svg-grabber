@@ -12,6 +12,7 @@
   background-color: var(--color-canvas);
   border-block-end: 1px solid var(--color-border);
   display: flex;
+  font-size: var(--text-normal);
   gap: 1.5rem;
   left: 0;
   padding: 1rem 1.5rem;
@@ -27,11 +28,11 @@
 }
 
 .container {
-  padding: 4rem 2rem;
+  padding: 1.5rem;
 }
 
 .footer {
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
@@ -59,9 +60,7 @@ h1 {
 
 .disclaimer {
   color: inherit;
-  font-size: 0.85rem;
-  font-weight: 300;
-  line-height: 1.5;
+  font-size: var(--text-small);
   margin: 0;
 }
 
@@ -93,18 +92,57 @@ h1 {
 .preview-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--color-text-secondary);
-}
-
-.preview-controls label {
-  font-size: var(--small-font-size);
+  gap: 1rem;
+  color: var(--color-ink);
+  font-size: var(--text-normal);
+  font-weight: var(--font-weight-regular);
 }
 
 .preview-controls input[type='range'] {
-  background-color: var(--color-border);
-  height: 0.25rem;
-  width: min(8rem, 100%);
+  --thumb-size: 1.5rem;
+  --track-size: 0.25rem;
+
   appearance: none;
+  background: var(--color-border);
+  border-radius: calc(var(--track-size) / 2);
   color: var(--color-accent);
+  cursor: pointer;
+  height: var(--track-size);
+  width: min(8rem, 100%);
+}
+
+.preview-controls input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--color-paper);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--thumb-size) / 2);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  touch-action: manipulation;
+  transition-property: background-color, border-color, box-shadow, filter, outline;
+  transition: 0.1s ease-out;
+}
+
+.preview-controls input[type='range']::-webkit-slider-thumb:hover {
+  background: var(--color-accent);
+}
+
+.preview-controls input[type='range']:focus-visible::-webkit-slider-thumb {
+  border-radius: calc(var(--thumb-size) / 2);
+  outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
+  outline-offset: var(--focus-ring-offset, 1px);
+}
+
+.preview-controls input[type='range']:focus-visible::-moz-range-thumb {
+  border-radius: calc(var(--thumb-size) / 2);
+  outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
+  outline-offset: var(--focus-ring-offset, 1px);
+}
+
+.preview-controls input[type='range']::-moz-range-thumb {
+  background: var(--color-paper);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--thumb-size) / 2);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
 }

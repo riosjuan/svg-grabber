@@ -13,14 +13,14 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background: var(--color-canvas);
-    font-size: var(--font-size);
+    font-size: var(--text-normal);
     font-family: var(--font-family);
     line-height: var(--line-height);
     letter-spacing: var(--letter-spacing);
   }
 
   p {
-    font-size: var(--font-size);
+    font-size: var(--text-normal);
     font-weight: var(--font-weight-regular);
   }
 
