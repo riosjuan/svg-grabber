@@ -60,6 +60,36 @@ const sanitizeSvgForPreview = (svg) => {
 
 const toSafeFilename = (value) => (value || 'svg').replace(/[^\w.-]+/g, '-');
 
+const createTooltip = (id, anchorId, text) => {
+  const tooltip = document.createElement('div');
+  tooltip.classList.add('svg-tooltip');
+  tooltip.id = id;
+  tooltip.setAttribute('popover', 'manual');
+  tooltip.setAttribute('anchor', anchorId);
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.textContent = text;
+  return tooltip;
+};
+
+const attachTooltipHandlers = (target, tooltip) => {
+  if (!target || !tooltip) return;
+
+  const show = () => tooltip.showPopover?.();
+  const hide = () => tooltip.hidePopover?.();
+
+  target.addEventListener('pointerenter', show);
+  target.addEventListener('pointerleave', hide);
+  target.addEventListener('focusin', show);
+  target.addEventListener('focusout', hide);
+  target.addEventListener('click', hide);
+};
+
+const setTooltipAnchor = (anchorEl, tooltipEl, anchorName) => {
+  if (!anchorEl || !tooltipEl || !anchorName) return;
+  anchorEl.style.setProperty('anchor-name', anchorName);
+  tooltipEl.style.setProperty('position-anchor', anchorName);
+};
+
 const createSvgCard = (svg, sender, index) => {
   const element = document.createElement('div');
   const base64doc = btoa(unescape(encodeURIComponent(svg)));
@@ -77,6 +107,7 @@ const createSvgCard = (svg, sender, index) => {
   copyButton.classList.add('btn', 'btn-icon', 'copy');
   copyButton.type = 'button';
   copyButton.setAttribute('aria-label', 'Copy SVG');
+  copyButton.id = `copy-btn-${index}`;
   copyButton.innerHTML = copyIcon;
 
   const downloadLink = document.createElement('a');
@@ -84,15 +115,42 @@ const createSvgCard = (svg, sender, index) => {
   downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
   downloadLink.href = `data:text/svg;base64,${base64doc}`;
   downloadLink.setAttribute('aria-label', 'Download SVG');
+  downloadLink.id = `download-btn-${index}`;
   downloadLink.innerHTML = downloadIcon;
 
-  actions.append(copyButton, downloadLink);
+  const copyTooltip = createTooltip(`copy-tooltip-${index}`, copyButton.id, 'Copy SVG');
+  const downloadTooltip = createTooltip(
+    `download-tooltip-${index}`,
+    downloadLink.id,
+    'Download SVG'
+  );
+  setTooltipAnchor(copyButton, copyTooltip, `--copy-anchor-${index}`);
+  setTooltipAnchor(downloadLink, downloadTooltip, `--download-anchor-${index}`);
+
+  copyButton.setAttribute('aria-describedby', copyTooltip.id);
+  copyButton.dataset.tooltipId = copyTooltip.id;
+  downloadLink.setAttribute('aria-describedby', downloadTooltip.id);
+  attachTooltipHandlers(copyButton, copyTooltip);
+  attachTooltipHandlers(downloadLink, downloadTooltip);
+
+  const copyAnchor = document.createElement('div');
+  copyAnchor.classList.add('svg-tooltip-anchor');
+  copyAnchor.append(copyButton, copyTooltip);
+
+  const downloadAnchor = document.createElement('div');
+  downloadAnchor.classList.add('svg-tooltip-anchor');
+  downloadAnchor.append(downloadLink, downloadTooltip);
+
+  actions.append(copyAnchor, downloadAnchor);
   element.append(content, actions);
   return element;
 };
 
 const showCopyButtonFeedback = (button) => {
   if (!button) return;
+  const hintTooltip = button.dataset.tooltipId
+    ? document.getElementById(button.dataset.tooltipId)
+    : null;
   const icon = button.querySelector('svg');
   const label = button.querySelector('span');
   if (!button.dataset.originalIcon && icon) {
@@ -108,6 +166,15 @@ const showCopyButtonFeedback = (button) => {
   }
 
   button.classList.add('is-success');
+  if (hintTooltip) {
+    if (!hintTooltip.dataset.originalText) {
+      hintTooltip.dataset.originalText = hintTooltip.textContent || 'Copy SVG';
+    }
+    hintTooltip.textContent = 'Copied!';
+    hintTooltip.setAttribute('role', 'status');
+    hintTooltip.setAttribute('aria-live', 'polite');
+    hintTooltip.showPopover?.();
+  }
 
   if (label) {
     label.textContent = '';
@@ -133,6 +200,12 @@ const showCopyButtonFeedback = (button) => {
     }
 
     button.classList.remove('is-success');
+    if (hintTooltip) {
+      hintTooltip.textContent = hintTooltip.dataset.originalText || 'Copy SVG';
+      hintTooltip.setAttribute('role', 'tooltip');
+      hintTooltip.removeAttribute('aria-live');
+      hintTooltip.hidePopover?.();
+    }
     delete button.dataset.resetTimeoutId;
   }, COPY_BUTTON_FEEDBACK_DURATION);
 

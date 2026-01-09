@@ -203,4 +203,44 @@
     justify-content: flex-end;
     gap: 0.5rem;
   }
+
+  .svg-tooltip-anchor {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .svg-tooltip {
+    background: var(--color-ink-darkest);
+    border-radius: calc(var(--border-radius) * 1.5);
+    color: var(--color-ink-inverse);
+    font-size: var(--text-small);
+    line-height: 1.2;
+    padding: 0.35rem 1ch;
+    pointer-events: none;
+    position: absolute;
+    opacity: 0;
+    transform: translate(-50%, -0.25rem);
+    transition:
+      opacity 0.12s ease-out,
+      transform 0.12s ease-out;
+    left: 50%;
+    bottom: calc(100% + 0.35rem);
+    white-space: nowrap;
+  }
+
+  .svg-tooltip:popover-open,
+  .svg-tooltip[data-open='true'] {
+    opacity: 1;
+    transform: translate(-50%, -0.5rem);
+  }
+
+  @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
+    .svg-tooltip[popover] {
+      position: absolute;
+      left: anchor(center);
+      top: calc(anchor(top) - 0.5rem);
+      transform: translate(-50%, -100%);
+      bottom: auto;
+    }
+  }
 }
