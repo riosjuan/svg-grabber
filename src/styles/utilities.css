@@ -1,0 +1,13 @@
+@layer utilities {
+  .font-bold {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .font-small {
+    font-size: var(--text-small);
+  }
+
+  .hidden {
+    display: none;
+  }
+}

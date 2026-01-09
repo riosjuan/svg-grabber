@@ -5,11 +5,51 @@
     grid-template-rows: auto 1fr auto;
   }
 
+  .header {
+    align-items: center;
+    background-color: var(--color-canvas);
+    border-block-end: 1px solid var(--color-border);
+    display: flex;
+    font-size: var(--text-normal);
+    gap: 1.5rem;
+    left: 0;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    right: 0;
+    top: 0;
+  }
+
+  .header-divider {
+    height: 2.5rem;
+    width: 1px;
+    background-color: var(--color-border);
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .footer {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: var(--text-normal);
+  }
+
   .svg-grid {
     align-content: stretch;
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
     grid-template-rows: auto;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+    color: var(--color-text-secondary);
+    margin-inline-start: auto;
   }
 }

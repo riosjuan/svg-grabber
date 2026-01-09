@@ -1,22 +1,21 @@
 @layer base {
   html {
-    background: var(--color-canvas);
-    color: var(--color-ink);
-    font-feature-settings: 'ss01', 'ss03';
-    font-optical-sizing: auto;
-    font-size: 16px;
-    font-weight: var(--font-weight);
-    scroll-behavior: smooth;
+    /*background: var(--color-canvas);*/
+    /*font-optical-sizing: auto;*/
+    font-size: 100%;
   }
 
   body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background: var(--color-canvas);
-    font-size: var(--text-normal);
+    color: var(--color-ink-medium);
     font-family: var(--font-family);
-    line-height: var(--line-height);
+    font-size: var(--text-normal);
+    font-weight: var(--font-weight-regular);
     letter-spacing: var(--letter-spacing);
+    line-height: var(--line-height);
+    text-rendering: optimizeLegibility;
   }
 
   p {

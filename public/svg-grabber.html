@@ -31,7 +31,7 @@
       <a id="sender-url" class="sender-url" href=""></a>
       <div class="controls">
         <div class="preview-controls hidden">
-          <span class="preview-controls__label">Light</span>
+          <span>Light</span>
           <input
             id="preview-bg"
             type="range"
@@ -41,7 +41,7 @@
             step="1"
             aria-label="Preview background brightness"
           />
-          <span class="preview-controls__label">Dark</span>
+          <span>Dark</span>
         </div>
         <button class="btn btn-accent btn-large hidden btn-download-all">
           Download all SVGs
@@ -79,11 +79,13 @@
     </header>
     <main class="container">
       <div class="disclaimer-alert" role="alert">
-        <p class="disclaimer">
-          Some of the logos design and the artwork you are about to download are the intellectual
-          property of the copyright and/or trademark holder and are offered to you as a convenience
-          for lawful use with proper permission from the copyright and/or trademark holder only.
-        </p>
+        <div>
+          <p class="font-bold">Copyright & trademark notice</p>
+          <p class="font-small">
+            Some logos and artwork are protected by copyright or trademark. You may download them
+            freely, but use requires proper permission from the rights holder.
+          </p>
+        </div>
         <button
           class="btn btn-icon disclaimer-dismiss"
           type="button"
@@ -103,7 +105,7 @@
       <div id="gallery-svg" class="svg-grid"></div>
       <input class="clipboard hidden" />
     </main>
-    <footer class="footer">by <a href="https://x.com/juanriosnl">@juanriosnl</a></footer>
+    <footer class="footer">By <a href="https://juanrios.me/">Juan Rios</a></footer>
     <script type="module" src="svg-manager.js"></script>
   </body>
 </html>
