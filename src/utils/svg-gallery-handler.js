@@ -6,11 +6,12 @@ const COPY_BUTTON_FEEDBACK_DURATION = 1500;
 // DOM Element Selectors
 const getElements = () => ({
   header: document.getElementById('header'),
+  svgCount: document.getElementById('svg-count'),
   senderLink: document.getElementById('sender-url'),
   svgGallery: document.getElementById('gallery-svg'),
-  downloadAllButtons: document.querySelectorAll('.btn-download-all'),
+  controls: document.querySelector('.controls'),
+  downloadAllButton: document.querySelector('.btn-download-all'),
   previewControls: document.querySelector('.preview-controls'),
-  disclaimer: document.querySelector('.disclaimer'),
   disclaimerAlert: document.querySelector('.disclaimer-alert'),
   disclaimerDismiss: document.querySelector('.disclaimer-dismiss'),
 });
@@ -214,25 +215,21 @@ const showCopyButtonFeedback = (button) => {
 
 // Main Functions
 export const setSvgUrl = (data, sender, pageUrl) => {
-  const { header, senderLink, svgGallery, downloadAllButtons, previewControls, disclaimer } =
-    getElements();
+  const { senderLink, svgGallery, svgCount, disclaimerAlert, controls } = getElements();
 
-  // Update header and sender link
-  if (header) header.textContent = `All SVGs from → ${sender}`;
   if (senderLink) {
     senderLink.textContent = pageUrl.replace(/\/$/, '');
     senderLink.href = pageUrl;
   }
+  if (svgCount) svgCount.textContent = `${data.length} SVGs`;
 
   // Clear existing SVG cards
   if (svgGallery) svgGallery.innerHTML = '';
 
   if (data.length === 0) {
     // Handle case when no SVGs are found
-    if (header) header.textContent = `No SVGs in → ${sender}`;
-    downloadAllButtons.forEach((button) => button.classList.add('hidden'));
-    if (previewControls) previewControls.classList.add('hidden');
-    if (disclaimer) disclaimer.textContent = 'It seems that this site does not use any SVGs. 🙃';
+    if (svgCount) svgCount.textContent = `No SVGs found 🙃`;
+    if (disclaimerAlert) disclaimerAlert.classList.add('hidden');
   } else {
     // Create and append SVG cards
     data.forEach((svg, index) => {
@@ -242,9 +239,8 @@ export const setSvgUrl = (data, sender, pageUrl) => {
       }
     });
 
-    // Show 'Download All' buttons
-    downloadAllButtons.forEach((button) => button.classList.remove('hidden'));
-    if (previewControls) previewControls.classList.remove('hidden');
+    if (controls) controls.classList.remove('hidden');
+    if (disclaimerAlert) disclaimerAlert.classList.remove('hidden');
   }
 };
 

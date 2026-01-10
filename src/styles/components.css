@@ -220,22 +220,20 @@
     opacity: 0;
     transform: translate(-50%, -0.25rem);
     transition:
-      opacity 0.12s ease-out,
-      transform 0.12s ease-out;
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
     left: 50%;
     bottom: calc(100% + 0.35rem);
     white-space: nowrap;
   }
 
-  .svg-tooltip:popover-open,
-  .svg-tooltip[data-open='true'] {
+  .svg-tooltip:popover-open {
     opacity: 1;
     transform: translate(-50%, -0.5rem);
   }
 
   @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
     .svg-tooltip[popover] {
-      position: absolute;
       left: anchor(center);
       top: calc(anchor(top) - 0.5rem);
       transform: translate(-50%, -100%);

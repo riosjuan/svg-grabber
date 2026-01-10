@@ -4,16 +4,14 @@ import { setSvgUrl, setupCopyButtons, setupDisclaimerAlert } from './utils';
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
-  document.querySelectorAll('.btn-download-all').forEach((button) => {
-    button.addEventListener('click', () => {
-      const zip = new JSZip();
-      document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
-        zip.file(`svg${index}.svg`, svg.outerHTML);
-      });
+  document.querySelector('.btn-download-all').addEventListener('click', () => {
+    const zip = new JSZip();
+    document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
+      zip.file(`svg${index}.svg`, svg.outerHTML);
+    });
 
-      zip.generateAsync({ type: 'blob' }).then((content) => {
-        saveAs(content, 'svgs_collection.zip');
-      });
+    zip.generateAsync({ type: 'blob' }).then((content) => {
+      saveAs(content, 'svgs_collection.zip');
     });
   });
 };
@@ -43,8 +41,6 @@ const setupPreviewBackgroundControl = () => {
 
 // Listen for incoming messages from the background script
 const initializePage = () => {
-  const previewControls = document.querySelector('.preview-controls');
-  if (previewControls) previewControls.classList.add('hidden');
   setupDownloadAllButton();
   setupCopyButtons();
   setupDisclaimerAlert();

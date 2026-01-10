@@ -14,9 +14,10 @@
         <img src="logo.svg" alt="svg-grabber" />
         <span class="sr-only">svg-grabber</span>
       </h1>
-      <a id="sender-url" class="sender-url" href="">Source page</a>
+      <a id="sender-url" class="sender-url" href="">Source page</a
+      ><span id="svg-count" class="svg-count">0</span>
       <div class="controls">
-        <div class="preview-controls hidden">
+        <div class="preview-controls">
           <span>Light</span>
           <input
             id="preview-bg"
@@ -29,7 +30,7 @@
           />
           <span>Dark</span>
         </div>
-        <button class="btn btn-accent btn-large hidden btn-download-all">
+        <button class="btn btn-accent btn-large btn-download-all">
           Download all SVGs
           <svg
             width="24"
@@ -64,7 +65,7 @@
       </div>
     </header>
     <main class="container">
-      <div class="disclaimer-alert" role="alert">
+      <div class="disclaimer-alert hidden" role="alert">
         <div>
           <p class="font-bold">Copyright & trademark notice</p>
           <p class="font-small">
