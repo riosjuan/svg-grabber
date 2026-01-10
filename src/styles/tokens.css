@@ -59,8 +59,7 @@
     --transition-duration: 0.25s;
 
     /* Others */
-    --max-card-width: 16rem;
-
+    --spacing: 1.5rem;
     --inline-spacing: 1ch;
     --block-spacing: 1rem;
   }

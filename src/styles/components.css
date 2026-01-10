@@ -5,13 +5,13 @@
     border-radius: var(--border-radius);
     border: var(--border);
     color: var(--color-ink-medium);
-    column-gap: 1ch;
+    column-gap: var(--inline-spacing);
     cursor: pointer;
     display: inline-flex;
     font-size: var(--text-normal);
     font-weight: var(--font-weight-semi-bold);
     justify-content: center;
-    line-height: 1.3em;
+    line-height: var(--line-height);
     padding: calc(var(--block-spacing) / 4) var(--inline-spacing);
     text-align: center;
     text-decoration: none;
@@ -58,7 +58,7 @@
 
   .logo {
     display: flex;
-    column-gap: 1.5rem;
+    column-gap: var(--spacing);
     height: 3rem;
 
     img {
@@ -87,7 +87,7 @@
     grid-template-columns: 1fr auto;
     margin-bottom: 2rem;
     max-width: 44em;
-    padding-inline-start: 1.5rem;
+    padding-inline-start: var(--spacing);
 
     > div {
       padding-block: 1rem;
@@ -177,10 +177,10 @@
     color: var(--color-text);
     display: flex;
     flex-flow: column;
-    gap: 1.5rem;
+    gap: var(--spacing);
     justify-content: space-between;
     max-width: var(--max-card-width);
-    padding: 1.5rem;
+    padding: var(--spacing);
   }
 
   .svg-card__content {
@@ -200,7 +200,7 @@
   .svg-card__actions {
     display: flex;
     justify-content: flex-end;
-    gap: 0.5rem;
+    gap: calc(var(--spacing) / 2);
   }
 
   .svg-tooltip-anchor {
@@ -213,8 +213,8 @@
     border-radius: calc(var(--border-radius) * 1.5);
     color: var(--color-ink-inverse);
     font-size: var(--text-small);
-    line-height: 1.2;
-    padding: 0.35rem 1ch;
+    line-height: var(--line-height);
+    padding: calc(var(--spacing) / 3) var(--inline-spacing);
     pointer-events: none;
     position: absolute;
     opacity: 0;
