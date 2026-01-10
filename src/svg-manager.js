@@ -25,7 +25,7 @@ const setupPreviewBackgroundControl = () => {
   slider.value = initialValue;
 
   const applyPreviewBackground = (value) => {
-    const lightness = 190 - Number.parseInt(value, 10);
+    const lightness = 100 - Number.parseInt(value, 10);
     if (Number.isNaN(lightness)) return;
     document.documentElement.style.setProperty('--svg-preview-bg', `oklch(${lightness}% 0% 0)`);
   };
