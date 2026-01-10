@@ -1,9 +1,7 @@
 import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
 
-// Constants
 const COPY_BUTTON_FEEDBACK_DURATION = 1500;
 
-// DOM Element Selectors
 const getElements = () => ({
   header: document.getElementById('header'),
   svgCount: document.getElementById('svg-count'),
@@ -16,7 +14,6 @@ const getElements = () => ({
   disclaimerDismiss: document.querySelector('.disclaimer-dismiss'),
 });
 
-// Helper Functions
 const sanitizeSvgForPreview = (svg) => {
   try {
     const parser = new DOMParser();
@@ -213,7 +210,6 @@ const showCopyButtonFeedback = (button) => {
   button.dataset.resetTimeoutId = String(timeoutId);
 };
 
-// Main Functions
 export const setSvgUrl = (data, sender, pageUrl) => {
   const { senderLink, svgGallery, svgCount, disclaimerAlert, controls } = getElements();
 
@@ -223,15 +219,12 @@ export const setSvgUrl = (data, sender, pageUrl) => {
   }
   if (svgCount) svgCount.textContent = `${data.length} SVGs`;
 
-  // Clear existing SVG cards
   if (svgGallery) svgGallery.innerHTML = '';
 
   if (data.length === 0) {
-    // Handle case when no SVGs are found
     if (svgCount) svgCount.textContent = `No SVGs found 🙃`;
     if (disclaimerAlert) disclaimerAlert.classList.add('hidden');
   } else {
-    // Create and append SVG cards
     data.forEach((svg, index) => {
       if (svgGallery) {
         const card = createSvgCard(svg, sender, index);
@@ -262,7 +255,6 @@ const copySvg = (event) => {
     .catch((err) => console.error('Failed to copy text: ', err));
 };
 
-// Event Listeners
 export const setupCopyButtons = () => {
   document.addEventListener('click', (event) => {
     if (event.target.closest('button.copy')) {

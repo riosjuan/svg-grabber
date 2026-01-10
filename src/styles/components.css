@@ -203,6 +203,15 @@
     gap: calc(var(--spacing) / 2);
   }
 
+  .svg-count {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    color: var(--color-ink-dark);
+    font-size: var(--text-small);
+    padding: calc(var(--block-spacing) / 8) calc(var(--inline-spacing) / 2);
+    margin-inline-start: calc(var(--inline-spacing) * -1);
+  }
+
   .svg-tooltip-anchor {
     position: relative;
     display: inline-flex;
