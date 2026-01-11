@@ -170,6 +170,15 @@
     width: var(--thumb-size);
   }
 
+  .source-title {
+    align-items: center;
+    color: var(--color-ink-darker);
+    display: flex;
+    font-size: var(--text-normal);
+    font-weight: var(--font-weight-bold);
+    margin-block-end: calc(var(--block-spacing) / 4);
+  }
+
   .svg-card {
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
@@ -189,6 +198,7 @@
     justify-content: center;
     background-color: var(--svg-preview-bg);
     border-radius: calc(var(--border-radius) * 0.75);
+    padding: var(--spacing);
 
     svg {
       aspect-ratio: 1;
@@ -203,15 +213,6 @@
     gap: calc(var(--spacing) / 2);
   }
 
-  .svg-count {
-    border: var(--border);
-    border-radius: var(--border-radius);
-    color: var(--color-ink-dark);
-    font-size: var(--text-small);
-    padding: calc(var(--block-spacing) / 8) calc(var(--inline-spacing) / 2);
-    margin-inline-start: calc(var(--inline-spacing) * -1);
-  }
-
   .svg-tooltip-anchor {
     position: relative;
     display: inline-flex;
@@ -222,7 +223,7 @@
     border-radius: calc(var(--border-radius) * 1.5);
     color: var(--color-ink-inverse);
     font-size: var(--text-small);
-    line-height: var(--line-height);
+    line-height: 1.5em;
     padding: calc(var(--spacing) / 3) var(--inline-spacing);
     pointer-events: none;
     position: absolute;
@@ -233,7 +234,14 @@
       transform 150ms ease-out;
     left: 50%;
     bottom: calc(100% + 0.35rem);
-    white-space: nowrap;
+    max-width: 35ch;
+  }
+
+  .svg-tooltip-right {
+    left: calc(100% + 0.35rem);
+    top: 50%;
+    bottom: auto;
+    transform: translate(0, -50%);
   }
 
   .svg-tooltip:popover-open {
@@ -241,11 +249,22 @@
     transform: translate(-50%, -0.5rem);
   }
 
+  .svg-tooltip-right:popover-open {
+    transform: translate(0, -50%);
+  }
+
   @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
     .svg-tooltip[popover] {
       left: anchor(center);
       top: calc(anchor(top) - 0.5rem);
       transform: translate(-50%, -100%);
+      bottom: auto;
+    }
+
+    .svg-tooltip-right[popover] {
+      left: calc(anchor(right) + 0.5rem);
+      top: anchor(center);
+      transform: translate(0, -50%);
       bottom: auto;
     }
   }

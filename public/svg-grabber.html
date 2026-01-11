@@ -14,8 +14,7 @@
         <img src="logo.svg" alt="svg-grabber" />
         <span class="sr-only">svg-grabber</span>
       </h1>
-      <a id="sender-url" class="sender-url" href="">Source page</a
-      ><span id="svg-count" class="svg-count">0</span>
+      <a id="sender-url" class="sender-url" href="">Source page</a>
       <div class="controls">
         <div class="preview-controls">
           <span>Light</span>
@@ -65,29 +64,50 @@
       </div>
     </header>
     <main class="container">
-      <div class="disclaimer-alert hidden" role="alert">
-        <div>
-          <p class="font-bold">Copyright & trademark notice</p>
-          <p class="font-small">
-            Some logos and artwork are protected by copyright or trademark. You may download them
-            freely, but use requires proper permission from the rights holder.
-          </p>
-        </div>
-        <button
-          class="btn btn-icon disclaimer-dismiss"
-          type="button"
-          aria-label="Dismiss disclaimer"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M18 6 6 18M6 6l12 12"
-            />
-          </svg>
-        </button>
+      <div class="source-section" style="margin-block-end: var(--spacing)">
+        <h2 class="source-title">
+          <span id="sender-url-secondary" class="sender-url">Source page</span>
+          <div class="svg-tooltip-anchor">
+            <button
+              class="btn btn-icon"
+              style="anchor-name: --anchor-btn-2; --icon-size: 1rem"
+              popovertarget="my-tooltip-2"
+              type="button"
+              aria-describedby="my-tooltip-2"
+            >
+              <p aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+              </p>
+              <p class="sr-only">Open Tooltip</p>
+            </button>
+            <div
+              id="my-tooltip-2"
+              class="svg-tooltip svg-tooltip-right"
+              style="position-anchor: --anchor-btn-2"
+              popover
+              role="tooltip"
+            >
+              <p>
+                Some logos and artwork are protected by copyright or trademark. You may download
+                them freely, but use requires proper permission from the rights holder.
+              </p>
+            </div>
+          </div>
+        </h2>
+        <p>
+          <span id="svg-count" class="text-small">0</span>
+        </p>
       </div>
       <div id="gallery-svg" class="svg-grid"></div>
       <input class="clipboard hidden" />

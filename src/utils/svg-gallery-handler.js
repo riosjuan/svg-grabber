@@ -6,6 +6,7 @@ const getElements = () => ({
   header: document.getElementById('header'),
   svgCount: document.getElementById('svg-count'),
   senderLink: document.getElementById('sender-url'),
+  senderTextSecondary: document.getElementById('sender-url-secondary'),
   svgGallery: document.getElementById('gallery-svg'),
   controls: document.querySelector('.controls'),
   downloadAllButton: document.querySelector('.btn-download-all'),
@@ -211,11 +212,21 @@ const showCopyButtonFeedback = (button) => {
 };
 
 export const setSvgUrl = (data, sender, pageUrl) => {
-  const { senderLink, svgGallery, svgCount, disclaimerAlert, controls } = getElements();
+  const { senderLink, senderTextSecondary, svgGallery, svgCount, disclaimerAlert, controls } =
+    getElements();
 
   if (senderLink) {
     senderLink.textContent = pageUrl.replace(/\/$/, '');
     senderLink.href = pageUrl;
+  }
+  if (senderTextSecondary) {
+    let sourceLabel = pageUrl;
+    try {
+      sourceLabel = new URL(pageUrl).hostname;
+    } catch {
+      sourceLabel = pageUrl.replace(/^https?:\/\//, '').split('/')[0];
+    }
+    senderTextSecondary.textContent = sourceLabel;
   }
   if (svgCount) svgCount.textContent = `${data.length} SVGs`;
 
