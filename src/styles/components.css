@@ -141,7 +141,7 @@
   .preview-controls input[type='range']::-webkit-slider-thumb {
     appearance: none;
     background: var(--color-paper);
-    border: 0.125rem solid var(--color-border);
+    border: var(--border);
     border-radius: var(--border-radius);
     height: var(--track-size);
     width: calc(var(--track-size) / 2);
@@ -174,13 +174,20 @@
     width: var(--thumb-size);
   }
 
-  .source-title {
+  .source-section {
+    margin-block-end: var(--spacing);
+  }
+
+  .source-header {
     align-items: center;
-    color: var(--color-ink-darker);
     display: flex;
-    font-size: var(--text-normal);
-    font-weight: var(--font-weight-bold);
     margin-block-end: calc(var(--block-spacing) / 4);
+  }
+
+  .source-title {
+    color: var(--color-ink-darker);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-normal);
   }
 
   .svg-card {

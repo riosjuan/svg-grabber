@@ -18,7 +18,7 @@
       <div class="controls">
         <div class="preview-controls">
           <label class="sr-only" for="preview-bg">Background brightness</label>
-          <span class="sr-only">Light</span>
+          <span id="preview-bg-light-label" class="sr-only">White</span>
           <input
             id="preview-bg"
             type="range"
@@ -26,9 +26,9 @@
             max="100"
             value="100"
             step="1"
-            aria-label="Preview background brightness"
+            aria-describedby="preview-bg-light-label preview-bg-dark-label"
           />
-          <span class="sr-only">Dark</span>
+          <span id="preview-bg-dark-label" class="sr-only">Black</span>
         </div>
         <button class="btn btn-accent btn-large btn-download-all">
           Download all SVGs
@@ -65,9 +65,11 @@
       </div>
     </header>
     <main class="container">
-      <div class="source-section" style="margin-block-end: var(--spacing)">
-        <h2 class="source-title">
-          <span id="sender-url-secondary" class="sender-url">Source page</span>
+      <div class="source-section">
+        <div class="source-header">
+          <h2 class="source-title">
+            <span id="sender-url-secondary" class="sender-url">Source page</span>
+          </h2>
           <div class="svg-tooltip-anchor">
             <button
               class="btn btn-icon"
@@ -76,21 +78,21 @@
               type="button"
               aria-describedby="my-tooltip-2"
             >
-              <p aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 16v-4M12 8h.01" />
-                </svg>
-              </p>
-              <p class="sr-only">Open Tooltip</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
+              </svg>
+
+              <span class="sr-only">Open Tooltip</span>
             </button>
             <div
               id="my-tooltip-2"
@@ -105,7 +107,7 @@
               </p>
             </div>
           </div>
-        </h2>
+        </div>
         <p>
           <span id="svg-count" class="text-small">0</span>
         </p>
