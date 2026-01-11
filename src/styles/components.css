@@ -114,33 +114,37 @@
 
   .preview-controls {
     align-items: center;
+    border-radius: calc(var(--border-radius) * 2);
+    border: var(--border);
     color: var(--color-ink-medium);
     display: flex;
     font-size: var(--text-normal);
     font-weight: var(--font-weight-semi-bold);
-    gap: 1rem;
   }
 
   .preview-controls input[type='range'] {
     --thumb-size: 1.5rem;
-    --track-size: 0.25rem;
+    --track-size: 2.5rem;
+    --track-border: 0.125rem;
 
     appearance: none;
     background: var(--color-ink-lighter);
-    border-radius: calc(var(--track-size) / 2);
+    background: linear-gradient(90deg, oklch(var(--lch-white)), oklch(var(--lch-black)));
+    border-radius: calc(var(--border-radius) * 2);
     color: var(--color-accent);
     cursor: pointer;
-    height: var(--track-size);
-    width: min(8rem, 100%);
+    height: calc(var(--track-size) - calc(var(--track-border) * 4));
+    width: 10rem;
+    border: var(--track-border) solid var(--color-paper);
   }
 
   .preview-controls input[type='range']::-webkit-slider-thumb {
     appearance: none;
     background: var(--color-paper);
-    border: var(--border);
-    border-radius: calc(var(--thumb-size) / 2);
-    height: var(--thumb-size);
-    width: var(--thumb-size);
+    border: 0.125rem solid var(--color-border);
+    border-radius: var(--border-radius);
+    height: var(--track-size);
+    width: calc(var(--track-size) / 2);
     touch-action: manipulation;
     transition-property: background-color, border-color, box-shadow, filter, outline;
     transition: 0.1s ease-out;
@@ -151,13 +155,13 @@
   }
 
   .preview-controls input[type='range']:focus-visible::-webkit-slider-thumb {
-    border-radius: calc(var(--thumb-size) / 2);
+    /*border-radius: calc(var(--thumb-size) / 2);*/
     outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
     outline-offset: var(--focus-ring-offset, 1px);
   }
 
   .preview-controls input[type='range']:focus-visible::-moz-range-thumb {
-    border-radius: calc(var(--thumb-size) / 2);
+    /*border-radius: calc(var(--thumb-size) / 2);*/
     outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
     outline-offset: var(--focus-ring-offset, 1px);
   }
