@@ -11,8 +11,6 @@ const getElements = () => ({
   controls: document.querySelector('.controls'),
   downloadAllButton: document.querySelector('.btn-download-all'),
   previewControls: document.querySelector('.preview-controls'),
-  disclaimerAlert: document.querySelector('.disclaimer-alert'),
-  disclaimerDismiss: document.querySelector('.disclaimer-dismiss'),
 });
 
 const sanitizeSvgForPreview = (svg) => {
@@ -212,8 +210,7 @@ const showCopyButtonFeedback = (button) => {
 };
 
 export const setSvgUrl = (data, sender, pageUrl) => {
-  const { senderLink, senderTextSecondary, svgGallery, svgCount, disclaimerAlert, controls } =
-    getElements();
+  const { senderLink, senderTextSecondary, svgGallery, svgCount, controls } = getElements();
 
   if (senderLink) {
     senderLink.textContent = pageUrl.replace(/\/$/, '');
@@ -234,7 +231,6 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 
   if (data.length === 0) {
     if (svgCount) svgCount.textContent = `No SVGs found 🙃`;
-    if (disclaimerAlert) disclaimerAlert.classList.add('hidden');
   } else {
     data.forEach((svg, index) => {
       if (svgGallery) {
@@ -244,7 +240,6 @@ export const setSvgUrl = (data, sender, pageUrl) => {
     });
 
     if (controls) controls.classList.remove('hidden');
-    if (disclaimerAlert) disclaimerAlert.classList.remove('hidden');
   }
 };
 
@@ -271,14 +266,5 @@ export const setupCopyButtons = () => {
     if (event.target.closest('button.copy')) {
       copySvg(event);
     }
-  });
-};
-
-export const setupDisclaimerAlert = () => {
-  const { disclaimerAlert, disclaimerDismiss } = getElements();
-  if (!disclaimerAlert || !disclaimerDismiss) return;
-
-  disclaimerDismiss.addEventListener('click', () => {
-    disclaimerAlert.classList.add('hidden');
   });
 };
