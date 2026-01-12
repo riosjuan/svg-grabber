@@ -5,31 +5,55 @@ import { setSvgUrl, setupCopyButtons } from './utils';
 const DEFAULT_NAME = 'collection';
 let lastSourceLabel = DEFAULT_NAME;
 
+const sanitizeFilename = (input) => {
+  if (!input) return DEFAULT_NAME;
+  return (
+    input
+      .toString()
+      .trim()
+      .replace(/[<>:"/\\|?*\x00-\x1F]/g, '-')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/(^[-.]+|[-.]+$)/g, '')
+      .slice(0, 80) || DEFAULT_NAME
+  );
+};
+
 const getSourceLabel = (pageUrl) => {
   if (!pageUrl) return DEFAULT_NAME;
   try {
-    return new URL(pageUrl).hostname;
+    return sanitizeFilename(new URL(pageUrl).hostname);
   } catch {
-    return pageUrl.replace(/^https?:\/\//, '').split('/')[0] || DEFAULT_NAME;
+    const raw = pageUrl.replace(/^https?:\/\//, '').split('/')[0] || DEFAULT_NAME;
+    return sanitizeFilename(raw);
   }
 };
 
 const getZipName = (label) => {
-  const baseName = label || DEFAULT_NAME;
+  const baseName = sanitizeFilename(label) || DEFAULT_NAME;
   return `svgs-${baseName}.zip`;
 };
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
-  document.querySelector('.btn-download-all').addEventListener('click', () => {
+  const downloadAllButton = document.querySelector('.btn-download-all');
+  if (!downloadAllButton) return;
+
+  downloadAllButton.addEventListener('click', () => {
     const zip = new JSZip();
     document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
-      zip.file(`${lastSourceLabel || DEFAULT_NAME}-${index}.svg`, svg.outerHTML);
+      const safeLabel = sanitizeFilename(lastSourceLabel) || DEFAULT_NAME;
+      zip.file(`${safeLabel}-${index}.svg`, svg.outerHTML);
     });
 
-    zip.generateAsync({ type: 'blob' }).then((content) => {
-      saveAs(content, getZipName(lastSourceLabel));
-    });
+    zip
+      .generateAsync({ type: 'blob' })
+      .then((content) => {
+        saveAs(content, getZipName(lastSourceLabel));
+      })
+      .catch((error) => {
+        console.error('Failed to generate SVG zip.', error);
+      });
   });
 };
 
