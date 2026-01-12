@@ -2,16 +2,33 @@ import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { setSvgUrl, setupCopyButtons } from './utils';
 
+const DEFAULT_NAME = 'collection';
+let lastSourceLabel = DEFAULT_NAME;
+
+const getSourceLabel = (pageUrl) => {
+  if (!pageUrl) return DEFAULT_NAME;
+  try {
+    return new URL(pageUrl).hostname;
+  } catch {
+    return pageUrl.replace(/^https?:\/\//, '').split('/')[0] || DEFAULT_NAME;
+  }
+};
+
+const getZipName = (label) => {
+  const baseName = label || DEFAULT_NAME;
+  return `svgs-${baseName}.zip`;
+};
+
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
   document.querySelector('.btn-download-all').addEventListener('click', () => {
     const zip = new JSZip();
     document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
-      zip.file(`svg${index}.svg`, svg.outerHTML);
+      zip.file(`${lastSourceLabel || DEFAULT_NAME}-${index}.svg`, svg.outerHTML);
     });
 
     zip.generateAsync({ type: 'blob' }).then((content) => {
-      saveAs(content, 'svgs_collection.zip');
+      saveAs(content, getZipName(lastSourceLabel));
     });
   });
 };
@@ -47,6 +64,7 @@ const initializePage = () => {
 
   chrome.runtime.onMessage.addListener((message) => {
     if (message.message === 'load_svgs') {
+      lastSourceLabel = getSourceLabel(message.pageUrl);
       setSvgUrl(message.data, message.sender, message.pageUrl);
     }
   });

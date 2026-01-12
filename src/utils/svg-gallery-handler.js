@@ -211,13 +211,14 @@ const showCopyButtonFeedback = (button) => {
 
 export const setSvgUrl = (data, sender, pageUrl) => {
   const { senderLink, senderTextSecondary, svgGallery, svgCount, controls } = getElements();
+  let sourceLabel = sender;
 
   if (senderLink) {
     senderLink.textContent = pageUrl.replace(/\/$/, '');
     senderLink.href = pageUrl;
   }
   if (senderTextSecondary) {
-    let sourceLabel = pageUrl;
+    sourceLabel = pageUrl;
     try {
       sourceLabel = new URL(pageUrl).hostname;
     } catch {
@@ -234,7 +235,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
   } else {
     data.forEach((svg, index) => {
       if (svgGallery) {
-        const card = createSvgCard(svg, sender, index);
+        const card = createSvgCard(svg, sourceLabel, index);
         svgGallery.appendChild(card);
       }
     });
