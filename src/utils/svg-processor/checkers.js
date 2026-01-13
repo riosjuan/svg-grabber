@@ -1,7 +1,10 @@
 export const ERROR_NOT_SVG_ELEMENT = 'Input is not an SVG element';
 
 export const isSVGElement = (node) => {
-  if (!(node instanceof SVGElement)) {
+  const isSvgElement =
+    node instanceof SVGElement ||
+    (node && node.nodeType === 1 && node.namespaceURI === 'http://www.w3.org/2000/svg');
+  if (!isSvgElement) {
     throw new Error(ERROR_NOT_SVG_ELEMENT);
   }
 };
