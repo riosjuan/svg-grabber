@@ -1,32 +1,13 @@
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { setSvgUrl, setupCopyButtons } from './utils';
+import { getSourceLabelFromUrl, sanitizeFilename, setSvgUrl, setupCopyButtons } from './utils';
 
 const DEFAULT_NAME = 'collection';
 let lastSourceLabel = DEFAULT_NAME;
 
-const sanitizeFilename = (input) => {
-  if (!input) return DEFAULT_NAME;
-  return (
-    input
-      .toString()
-      .trim()
-      .replace(/[<>:"/\\|?*\x00-\x1F]/g, '-')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/(^[-.]+|[-.]+$)/g, '')
-      .slice(0, 80) || DEFAULT_NAME
-  );
-};
-
 const getSourceLabel = (pageUrl) => {
-  if (!pageUrl) return DEFAULT_NAME;
-  try {
-    return sanitizeFilename(new URL(pageUrl).hostname);
-  } catch {
-    const raw = pageUrl.replace(/^https?:\/\//, '').split('/')[0] || DEFAULT_NAME;
-    return sanitizeFilename(raw);
-  }
+  const rawLabel = getSourceLabelFromUrl(pageUrl, DEFAULT_NAME);
+  return sanitizeFilename(rawLabel) || DEFAULT_NAME;
 };
 
 const getZipName = (label) => {
@@ -41,9 +22,17 @@ const setupDownloadAllButton = () => {
 
   downloadAllButton.addEventListener('click', () => {
     const zip = new JSZip();
-    document.querySelectorAll('.svg-card svg').forEach((svg, index) => {
+    document.querySelectorAll('.svg-card').forEach((card, index) => {
       const safeLabel = sanitizeFilename(lastSourceLabel) || DEFAULT_NAME;
-      zip.file(`${safeLabel}-${index}.svg`, svg.outerHTML);
+      const rawSvg = card.dataset.rawSvg;
+      if (rawSvg) {
+        zip.file(`${safeLabel}-${index}.svg`, rawSvg);
+        return;
+      }
+      const fallbackSvg = card.querySelector('svg')?.outerHTML;
+      if (fallbackSvg) {
+        zip.file(`${safeLabel}-${index}.svg`, fallbackSvg);
+      }
     });
 
     zip

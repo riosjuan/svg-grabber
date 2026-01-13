@@ -1,4 +1,6 @@
 import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
+import { toSafeFilename } from './filename';
+import { getSourceLabelFromUrl } from './source-label';
 
 const COPY_BUTTON_FEEDBACK_DURATION = 1500;
 
@@ -54,8 +56,6 @@ const sanitizeSvgForPreview = (svg) => {
     return '';
   }
 };
-
-const toSafeFilename = (value) => (value || 'svg').replace(/[^\w.-]+/g, '-');
 
 const createTooltip = (id, anchorId, text) => {
   const tooltip = document.createElement('div');
@@ -218,12 +218,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
     senderLink.href = pageUrl;
   }
   if (senderTextSecondary) {
-    sourceLabel = pageUrl;
-    try {
-      sourceLabel = new URL(pageUrl).hostname;
-    } catch {
-      sourceLabel = pageUrl.replace(/^https?:\/\//, '').split('/')[0];
-    }
+    sourceLabel = getSourceLabelFromUrl(pageUrl, pageUrl);
     senderTextSecondary.textContent = sourceLabel;
   }
   if (svgCount) svgCount.textContent = `${data.length} SVGs`;
