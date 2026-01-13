@@ -138,7 +138,7 @@ const createSvgCard = (svg, sender, index) => {
   downloadAnchor.classList.add('svg-tooltip-anchor');
   downloadAnchor.append(downloadLink, downloadTooltip);
 
-  actions.append(copyAnchor, downloadAnchor);
+  actions.append(downloadAnchor, copyAnchor);
   element.append(content, actions);
   return element;
 };
