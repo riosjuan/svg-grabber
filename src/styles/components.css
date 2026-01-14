@@ -45,6 +45,7 @@
 
   .btn-icon.is-success {
     pointer-events: none;
+    animation: pop-in 200ms ease-out both;
 
     svg {
       color: var(--color-success);

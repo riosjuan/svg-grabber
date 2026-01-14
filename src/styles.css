@@ -1,4 +1,4 @@
-@layer reset, tokens, base, components, layout, utilities;
+@layer reset, tokens, base, components, layout, utilities, animations;
 
 @import url('./styles/reset.css') layer(reset);
 @import url('./styles/tokens.css') layer(tokens);
@@ -6,3 +6,4 @@
 @import url('./styles/components.css') layer(components);
 @import url('./styles/layout.css') layer(layout);
 @import url('./styles/utilities.css') layer(utilities);
+@import url('./styles/animations.css') layer(animations);

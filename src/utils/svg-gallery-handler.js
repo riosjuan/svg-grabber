@@ -2,7 +2,7 @@ import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
 import { toSafeFilename } from './filename';
 import { getSourceLabelFromUrl } from './source-label';
 
-const COPY_BUTTON_FEEDBACK_DURATION = 1500;
+const COPY_BUTTON_FEEDBACK_DURATION = 500;
 
 const getElements = () => ({
   header: document.getElementById('header'),
