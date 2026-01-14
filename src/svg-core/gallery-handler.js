@@ -1,6 +1,5 @@
 import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
-import { toSafeFilename } from './filename';
-import { getSourceLabelFromUrl } from './source-label';
+import { getSourceLabelFromUrl, toSafeFilename } from '../helpers';
 
 const COPY_BUTTON_FEEDBACK_DURATION = 500;
 

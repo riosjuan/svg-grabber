@@ -1,6 +1,7 @@
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { getSourceLabelFromUrl, sanitizeFilename, setSvgUrl, setupCopyButtons } from './utils';
+import { getSourceLabelFromUrl, sanitizeFilename } from '../helpers';
+import { setSvgUrl, setupCopyButtons } from './gallery-handler';
 
 const DEFAULT_NAME = 'collection';
 let lastSourceLabel = DEFAULT_NAME;

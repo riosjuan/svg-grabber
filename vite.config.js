@@ -8,7 +8,7 @@ export default defineConfig({
       input: {
         background: resolve(__dirname, 'src/background.js'),
         content: resolve(__dirname, 'src/content.js'),
-        'svg-manager': resolve(__dirname, 'src/svg-manager.js'),
+        manager: resolve(__dirname, 'src/svg-core/manager.js'),
         styles: resolve(__dirname, 'src/styles.css'),
       },
       output: {

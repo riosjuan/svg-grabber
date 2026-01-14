@@ -23,7 +23,7 @@
   "permissions": ["activeTab", "scripting", "clipboardWrite"],
   "web_accessible_resources": [
     {
-      "resources": ["svg-grabber.html", "svg-manager.js"],
+      "resources": ["svg-grabber.html", "manager.js"],
       "matches": ["https://*/*"]
     }
   ]
