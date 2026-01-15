@@ -212,7 +212,12 @@
       transform 150ms ease-out;
     left: 50%;
     bottom: calc(100% + 0.35rem);
+    white-space: nowrap;
+  }
+
+  .svg-tooltip-large {
     max-width: 35ch;
+    white-space: normal;
   }
 
   .svg-tooltip-right {
