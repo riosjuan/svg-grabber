@@ -1,7 +1,6 @@
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { getSourceLabelFromUrl, sanitizeFilename } from '../helpers';
-import { setupThemeToggle } from '../darkmode';
+import { getSourceLabelFromUrl, sanitizeFilename, setupThemeToggle } from '../helpers';
 import { setSvgUrl, setupCopyButtons } from './gallery-handler';
 
 const DEFAULT_NAME = 'collection';
