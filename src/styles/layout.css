@@ -12,11 +12,10 @@
     display: flex;
     font-size: var(--text-normal);
     gap: var(--spacing);
-    left: 0;
+    inset: 0 0 auto 0;
     padding: 1rem var(--spacing);
     position: sticky;
-    right: 0;
-    top: 0;
+    z-index: 10;
   }
 
   .header-divider {
