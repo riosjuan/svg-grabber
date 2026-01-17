@@ -229,7 +229,20 @@
     transform: translate(-50%, -0.5rem);
   }
 
+  .svg-tooltip.is-visible {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -0.5rem);
+  }
+
   .svg-tooltip-right:popover-open {
+    transform: translate(0, -50%);
+  }
+
+  .svg-tooltip-right.is-visible {
+    display: block;
+    visibility: visible;
     transform: translate(0, -50%);
   }
 
