@@ -12,15 +12,23 @@
     <header class="header">
       <h1 class="logo">
         <picture>
-          <source srcset="logo-for-dark.svg" media="(prefers-color-scheme: dark)" />
-          <source srcset="logo-for-light.svg" media="(prefers-color-scheme: light)" />
+          <source
+            srcset="logo-for-dark.svg"
+            media="(prefers-color-scheme: dark)"
+            data-theme="dark"
+          />
+          <source
+            srcset="logo-for-light.svg"
+            media="(prefers-color-scheme: light)"
+            data-theme="light"
+          />
           <img src="logo-for-light.svg" alt="svg-grabber" />
         </picture>
         <span class="sr-only">svg-grabber</span>
       </h1>
       <a id="sender-url" class="sender-url" href="">Source page</a>
       <div class="controls hidden">
-        <button>Light</button>
+        <button type="button" class="btn btn-theme-toggle">Light</button>
         <div class="preview-controls">
           <label class="sr-only" for="preview-bg">Background brightness</label>
           <span id="preview-bg-light-label" class="sr-only">White</span>

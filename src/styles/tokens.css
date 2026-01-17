@@ -79,4 +79,12 @@
     --inline-spacing: 1ch;
     --block-spacing: 1rem;
   }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+  }
 }

@@ -1,6 +1,7 @@
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { getSourceLabelFromUrl, sanitizeFilename } from '../helpers';
+import { setupThemeToggle } from '../darkmode';
 import { setSvgUrl, setupCopyButtons } from './gallery-handler';
 
 const DEFAULT_NAME = 'collection';
@@ -72,6 +73,7 @@ const setupPreviewBackgroundControl = () => {
 
 // Listen for incoming messages from the background script
 const initializePage = () => {
+  setupThemeToggle();
   setupDownloadAllButton();
   setupCopyButtons();
   setupPreviewBackgroundControl();
