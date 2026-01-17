@@ -161,7 +161,7 @@
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
     border: var(--border);
-    color: var(--color-text);
+    color: #000;
     display: flex;
     flex-flow: column;
     gap: var(--spacing);

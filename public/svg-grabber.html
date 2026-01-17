@@ -11,11 +11,16 @@
   <body class="layout-grid">
     <header class="header">
       <h1 class="logo">
-        <img src="logo.svg" alt="svg-grabber" />
+        <picture>
+          <source srcset="logo-for-dark.svg" media="(prefers-color-scheme: dark)" />
+          <source srcset="logo-for-light.svg" media="(prefers-color-scheme: light)" />
+          <img src="logo-for-light.svg" alt="svg-grabber" />
+        </picture>
         <span class="sr-only">svg-grabber</span>
       </h1>
       <a id="sender-url" class="sender-url" href="">Source page</a>
       <div class="controls hidden">
+        <button>Light</button>
         <div class="preview-controls">
           <label class="sr-only" for="preview-bg">Background brightness</label>
           <span id="preview-bg-light-label" class="sr-only">White</span>
