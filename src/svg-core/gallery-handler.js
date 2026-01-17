@@ -1,7 +1,11 @@
 import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
 import { getSourceLabelFromUrl, toSafeFilename } from '../helpers';
 
-const COPY_BUTTON_FEEDBACK_DURATION = 500;
+const COPY_BUTTON_FEEDBACK_DURATION = 1000;
+const COPY_TOOLTIP_TEXT = 'Copy SVG';
+const COPY_FEEDBACK_TEXT = 'Copied!';
+const COPY_LABEL_FALLBACK_TEXT = 'Copy';
+const DOWNLOAD_TOOLTIP_TEXT = 'Download SVG';
 
 const getElements = () => ({
   header: document.getElementById('header'),
@@ -64,14 +68,40 @@ const createTooltip = (id, anchorId, text) => {
   tooltip.setAttribute('anchor', anchorId);
   tooltip.setAttribute('role', 'tooltip');
   tooltip.textContent = text;
+  tooltip.dataset.originalText = text;
   return tooltip;
+};
+
+const showTooltip = (tooltip) => {
+  if (!tooltip) return;
+  if (tooltip.showPopover) {
+    try {
+      tooltip.showPopover();
+    } catch (error) {
+      // Ignore popover state errors and fall back to CSS visibility.
+    }
+  }
+  tooltip.classList.add('is-visible');
+};
+
+const hideTooltip = (tooltip) => {
+  if (!tooltip) return;
+  if (tooltip.dataset.locked === 'true') return;
+  if (tooltip.hidePopover) {
+    try {
+      tooltip.hidePopover();
+    } catch (error) {
+      // Ignore popover state errors and fall back to CSS visibility.
+    }
+  }
+  tooltip.classList.remove('is-visible');
 };
 
 const attachTooltipHandlers = (target, tooltip) => {
   if (!target || !tooltip) return;
 
-  const show = () => tooltip.showPopover?.();
-  const hide = () => tooltip.hidePopover?.();
+  const show = () => showTooltip(tooltip);
+  const hide = () => hideTooltip(tooltip);
 
   target.addEventListener('pointerenter', show);
   target.addEventListener('pointerleave', hide);
@@ -102,7 +132,7 @@ const createSvgCard = (svg, sender, index) => {
   const copyButton = document.createElement('button');
   copyButton.classList.add('btn', 'btn-icon', 'copy');
   copyButton.type = 'button';
-  copyButton.setAttribute('aria-label', 'Copy SVG');
+  copyButton.setAttribute('aria-label', COPY_TOOLTIP_TEXT);
   copyButton.id = `copy-btn-${index}`;
   copyButton.innerHTML = copyIcon;
 
@@ -110,15 +140,15 @@ const createSvgCard = (svg, sender, index) => {
   downloadLink.classList.add('btn', 'btn-icon');
   downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
   downloadLink.href = `data:text/svg;base64,${base64doc}`;
-  downloadLink.setAttribute('aria-label', 'Download SVG');
+  downloadLink.setAttribute('aria-label', DOWNLOAD_TOOLTIP_TEXT);
   downloadLink.id = `download-btn-${index}`;
   downloadLink.innerHTML = downloadIcon;
 
-  const copyTooltip = createTooltip(`copy-tooltip-${index}`, copyButton.id, 'Copy SVG');
+  const copyTooltip = createTooltip(`copy-tooltip-${index}`, copyButton.id, COPY_TOOLTIP_TEXT);
   const downloadTooltip = createTooltip(
     `download-tooltip-${index}`,
     downloadLink.id,
-    'Download SVG'
+    DOWNLOAD_TOOLTIP_TEXT
   );
   setTooltipAnchor(copyButton, copyTooltip, `--copy-anchor-${index}`);
   setTooltipAnchor(downloadLink, downloadTooltip, `--download-anchor-${index}`);
@@ -163,13 +193,11 @@ const showCopyButtonFeedback = (button) => {
 
   button.classList.add('is-success');
   if (hintTooltip) {
-    if (!hintTooltip.dataset.originalText) {
-      hintTooltip.dataset.originalText = hintTooltip.textContent || 'Copy SVG';
-    }
-    hintTooltip.textContent = 'Copied!';
+    hintTooltip.textContent = COPY_FEEDBACK_TEXT;
     hintTooltip.setAttribute('role', 'status');
     hintTooltip.setAttribute('aria-live', 'polite');
-    hintTooltip.showPopover?.();
+    hintTooltip.dataset.locked = 'true';
+    showTooltip(hintTooltip);
   }
 
   if (label) {
@@ -191,16 +219,17 @@ const showCopyButtonFeedback = (button) => {
     }
 
     if (label) {
-      label.textContent = button.dataset.originalText || 'Copy';
+      label.textContent = button.dataset.originalText || COPY_LABEL_FALLBACK_TEXT;
       label.hidden = false;
     }
 
     button.classList.remove('is-success');
     if (hintTooltip) {
-      hintTooltip.textContent = hintTooltip.dataset.originalText || 'Copy SVG';
+      hintTooltip.textContent = hintTooltip.dataset.originalText || COPY_TOOLTIP_TEXT;
       hintTooltip.setAttribute('role', 'tooltip');
       hintTooltip.removeAttribute('aria-live');
-      hintTooltip.hidePopover?.();
+      delete hintTooltip.dataset.locked;
+      hideTooltip(hintTooltip);
     }
     delete button.dataset.resetTimeoutId;
   }, COPY_BUTTON_FEEDBACK_DURATION);
