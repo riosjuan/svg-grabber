@@ -1,5 +1,11 @@
 import { checkmarkIcon, copyIcon, downloadIcon } from './icons';
-import { getSourceLabelFromUrl, toSafeFilename } from '../helpers';
+import {
+  getSourceLabelFromUrl,
+  hideTooltip,
+  initTooltip,
+  showTooltip,
+  toSafeFilename,
+} from '../helpers';
 
 const COPY_BUTTON_FEEDBACK_DURATION = 1000;
 const COPY_TOOLTIP_TEXT = 'Copy SVG';
@@ -60,62 +66,6 @@ const sanitizeSvgForPreview = (svg) => {
   }
 };
 
-const createTooltip = (id, anchorId, text) => {
-  const tooltip = document.createElement('div');
-  tooltip.classList.add('svg-tooltip');
-  tooltip.id = id;
-  tooltip.setAttribute('popover', 'manual');
-  tooltip.setAttribute('anchor', anchorId);
-  tooltip.setAttribute('role', 'tooltip');
-  tooltip.textContent = text;
-  tooltip.dataset.originalText = text;
-  return tooltip;
-};
-
-const showTooltip = (tooltip) => {
-  if (!tooltip) return;
-  if (tooltip.showPopover) {
-    try {
-      tooltip.showPopover();
-    } catch (error) {
-      // Ignore popover state errors and fall back to CSS visibility.
-    }
-  }
-  tooltip.classList.add('is-visible');
-};
-
-const hideTooltip = (tooltip) => {
-  if (!tooltip) return;
-  if (tooltip.dataset.locked === 'true') return;
-  if (tooltip.hidePopover) {
-    try {
-      tooltip.hidePopover();
-    } catch (error) {
-      // Ignore popover state errors and fall back to CSS visibility.
-    }
-  }
-  tooltip.classList.remove('is-visible');
-};
-
-const attachTooltipHandlers = (target, tooltip) => {
-  if (!target || !tooltip) return;
-
-  const show = () => showTooltip(tooltip);
-  const hide = () => hideTooltip(tooltip);
-
-  target.addEventListener('pointerenter', show);
-  target.addEventListener('pointerleave', hide);
-  target.addEventListener('focusin', show);
-  target.addEventListener('focusout', hide);
-  target.addEventListener('click', hide);
-};
-
-const setTooltipAnchor = (anchorEl, tooltipEl, anchorName) => {
-  if (!anchorEl || !tooltipEl || !anchorName) return;
-  anchorEl.style.setProperty('anchor-name', anchorName);
-  tooltipEl.style.setProperty('position-anchor', anchorName);
-};
-
 const createSvgCard = (svg, sender, index) => {
   const element = document.createElement('div');
   const base64doc = btoa(unescape(encodeURIComponent(svg)));
@@ -144,30 +94,11 @@ const createSvgCard = (svg, sender, index) => {
   downloadLink.id = `download-btn-${index}`;
   downloadLink.innerHTML = downloadIcon;
 
-  const copyTooltip = createTooltip(`copy-tooltip-${index}`, copyButton.id, COPY_TOOLTIP_TEXT);
-  const downloadTooltip = createTooltip(
-    `download-tooltip-${index}`,
-    downloadLink.id,
-    DOWNLOAD_TOOLTIP_TEXT
-  );
-  setTooltipAnchor(copyButton, copyTooltip, `--copy-anchor-${index}`);
-  setTooltipAnchor(downloadLink, downloadTooltip, `--download-anchor-${index}`);
-
-  copyButton.setAttribute('aria-describedby', copyTooltip.id);
-  copyButton.dataset.tooltipId = copyTooltip.id;
-  downloadLink.setAttribute('aria-describedby', downloadTooltip.id);
-  attachTooltipHandlers(copyButton, copyTooltip);
-  attachTooltipHandlers(downloadLink, downloadTooltip);
-
-  const copyAnchor = document.createElement('div');
-  copyAnchor.classList.add('svg-tooltip-anchor');
-  copyAnchor.append(copyButton, copyTooltip);
-
-  const downloadAnchor = document.createElement('div');
-  downloadAnchor.classList.add('svg-tooltip-anchor');
-  downloadAnchor.append(downloadLink, downloadTooltip);
-
-  actions.append(downloadAnchor, copyAnchor);
+  copyButton.dataset.tooltip = COPY_TOOLTIP_TEXT;
+  downloadLink.dataset.tooltip = DOWNLOAD_TOOLTIP_TEXT;
+  initTooltip(copyButton);
+  initTooltip(downloadLink);
+  actions.append(downloadLink, copyButton);
   element.append(content, actions);
   return element;
 };
@@ -197,7 +128,7 @@ const showCopyButtonFeedback = (button) => {
     hintTooltip.setAttribute('role', 'status');
     hintTooltip.setAttribute('aria-live', 'polite');
     hintTooltip.dataset.locked = 'true';
-    showTooltip(hintTooltip);
+    showTooltip(hintTooltip, button);
   }
 
   if (label) {
