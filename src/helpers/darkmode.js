@@ -12,7 +12,7 @@ const updateToggle = (theme) => {
   const toggle = document.querySelector(themeToggleSelector);
   if (!toggle) return;
 
-  toggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+  toggle.innerHTML = theme === 'dark' ? 'Light' : 'Dark';
   toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
   toggle.setAttribute('aria-label', 'Toggle color theme');
 };
