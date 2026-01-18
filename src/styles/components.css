@@ -191,77 +191,21 @@
     gap: calc(var(--spacing) / 2);
   }
 
-  .svg-tooltip-anchor {
-    position: relative;
-    display: inline-flex;
-  }
-
-  .svg-tooltip {
-    background: var(--color-ink-darkest);
+  .svg-tooltip[popover='hint'] {
+    inset: unset;
+    position: absolute;
+    top: calc(anchor(bottom) + 0.35rem);
+    justify-self: anchor-center;
+    margin: 0;
+    padding: calc(var(--spacing) / 3) var(--inline-spacing);
     border-radius: calc(var(--border-radius) * 1.5);
+    background: var(--color-ink-darkest);
     color: var(--color-ink-inverse);
+    box-shadow: 0 0.2rem 0.6rem oklch(var(--lch-ink-darkest) / 0.35);
+    border: none;
     font-size: var(--text-small);
     line-height: 1.5em;
-    padding: calc(var(--spacing) / 3) var(--inline-spacing);
-    pointer-events: none;
-    position: absolute;
-    opacity: 0;
-    transform: translate(-50%, -0.25rem);
-    transition:
-      opacity 150ms ease-out,
-      transform 150ms ease-out;
-    left: 50%;
-    bottom: calc(100% + 0.35rem);
     white-space: nowrap;
-  }
-
-  .svg-tooltip-large {
-    max-width: 35ch;
-    white-space: normal;
-  }
-
-  .svg-tooltip-right {
-    left: calc(100% + 0.35rem);
-    top: 50%;
-    bottom: auto;
-    transform: translate(0, -50%);
-  }
-
-  .svg-tooltip:popover-open {
-    opacity: 1;
-    transform: translate(-50%, -0.5rem);
-  }
-
-  .svg-tooltip.is-visible {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    transform: translate(-50%, -0.5rem);
-  }
-
-  .svg-tooltip-right:popover-open {
-    transform: translate(0, -50%);
-  }
-
-  .svg-tooltip-right.is-visible {
-    display: block;
-    visibility: visible;
-    transform: translate(0, -50%);
-  }
-
-  @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
-    .svg-tooltip[popover] {
-      left: anchor(center);
-      top: calc(anchor(top) - 0.5rem);
-      transform: translate(-50%, -100%);
-      bottom: auto;
-    }
-
-    .svg-tooltip-right[popover] {
-      left: calc(anchor(right) + 0.5rem);
-      top: anchor(center);
-      transform: translate(0, -50%);
-      bottom: auto;
-    }
+    pointer-events: none;
   }
 }
