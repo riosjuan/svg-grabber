@@ -58,21 +58,18 @@
   }
 
   .logo {
+    --logo-height: 3rem;
+
     display: flex;
     column-gap: var(--spacing);
-    height: 3rem;
-
-    img {
-      height: 100%;
-      max-height: 100%;
-      width: auto;
-    }
+    height: var(--logo-height);
+    color: light-dark(black, white);
 
     &::after {
       content: '';
       display: block;
       border-inline-end: var(--border);
-      height: 3rem;
+      height: var(--logo-height);
     }
   }
 
@@ -161,7 +158,7 @@
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
     border: var(--border);
-    color: var(--color-text);
+    color: #000;
     display: flex;
     flex-flow: column;
     gap: var(--spacing);
@@ -191,11 +188,20 @@
     gap: calc(var(--spacing) / 2);
   }
 
-  .svg-tooltip[popover='hint'] {
+  .svg-tooltip-anchor {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .svg-tooltip {
+    --tooltip-left: 50%;
+    --tooltip-top: auto;
+    --tooltip-bottom: calc(100% + 0.35rem);
+    --tooltip-transform: translate(-50%, -0.25rem);
+    --tooltip-open-transform: translate(-50%, -0.5rem);
+
     inset: unset;
     position: absolute;
-    top: calc(anchor(bottom) + 0.35rem);
-    justify-self: anchor-center;
     margin: 0;
     padding: calc(var(--spacing) / 3) var(--inline-spacing);
     border-radius: calc(var(--border-radius) * 1.5);
@@ -207,5 +213,49 @@
     line-height: 1.5em;
     white-space: nowrap;
     pointer-events: none;
+    opacity: 0;
+    transform: var(--tooltip-transform);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+    left: var(--tooltip-left);
+    top: var(--tooltip-top);
+    bottom: var(--tooltip-bottom);
+  }
+
+  .svg-tooltip-large {
+    max-width: 35ch;
+    white-space: normal;
+  }
+
+  .svg-tooltip-right {
+    --tooltip-left: calc(100% + 0.35rem);
+    --tooltip-top: 50%;
+    --tooltip-bottom: auto;
+    --tooltip-transform: translate(0, -50%);
+    --tooltip-open-transform: translate(0, -50%);
+  }
+
+  .svg-tooltip:popover-open {
+    opacity: 1;
+    transform: var(--tooltip-open-transform, var(--tooltip-transform));
+  }
+
+  @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
+    .svg-tooltip:where([popover], [popover='hint']) {
+      --tooltip-left: anchor(center);
+      --tooltip-top: calc(anchor(bottom) + 0.35rem);
+      --tooltip-bottom: auto;
+      --tooltip-transform: translate(-50%, 0);
+      --tooltip-open-transform: translate(-50%, 0);
+    }
+
+    .svg-tooltip-right:where([popover], [popover='hint']) {
+      --tooltip-left: calc(anchor(right) + 0.5rem);
+      --tooltip-top: anchor(center);
+      --tooltip-bottom: auto;
+      --tooltip-transform: translate(0, -50%);
+      --tooltip-open-transform: translate(0, -50%);
+    }
   }
 }
