@@ -25,8 +25,7 @@
     color: var(--color-ink-inverse);
     background-color: var(--color-accent);
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: var(--color-accent-hover);
     }
   }
@@ -36,8 +35,7 @@
     border-color: var(--color-accent);
     color: var(--color-accent);
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--color-ink-inverse);
       background-color: var(--color-accent-hover);
     }
