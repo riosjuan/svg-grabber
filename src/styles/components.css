@@ -74,7 +74,10 @@
   }
 
   .sender-url {
-    overflow-wrap: anywhere;
+    overflow: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
   }
 
   .preview-controls {
