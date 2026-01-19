@@ -31,6 +31,18 @@
     }
   }
 
+  .btn-outline {
+    background-color: transparent;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+
+    &:hover,
+    &:focus {
+      color: var(--color-ink-inverse);
+      background-color: var(--color-accent-hover);
+    }
+  }
+
   .btn-icon {
     --icon-size: 1.5rem;
 

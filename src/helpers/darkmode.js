@@ -1,4 +1,4 @@
-import { moonIcon, sunIcon } from '../svg-core/icons';
+// import { moonIcon, sunIcon } from '../svg-core/icons';
 
 const THEME_STORAGE_KEY = 'theme-preference';
 const themeToggleSelector = '.btn-theme-toggle';
@@ -12,7 +12,7 @@ const updateToggle = (theme) => {
   const toggle = document.querySelector(themeToggleSelector);
   if (!toggle) return;
 
-  toggle.innerHTML = theme === 'dark' ? 'Light' : 'Dark';
+  toggle.innerHTML = theme === 'dark' ? 'Theme Light' : 'Theme Dark';
   toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
   toggle.setAttribute('aria-label', 'Toggle color theme');
 };
