@@ -4,16 +4,16 @@
 
     /* Palette */
     --lch-blue: 46% 0.3 265;
-    --lch-blue-light: 87% 0.31 265;
     --lch-green: 56% 0.3 145;
     --lch-white: 100% 0% 0;
     --lch-black: 0% 0% 0;
 
     --lch-ink-darkest: 26% 0 0;
-    --lch-ink-darker: 40% 0 0;
-    --lch-ink-dark: 30% 0 0;
-    --lch-ink-medium: 50% 0 0;
-    --lch-ink-light: 70% 0 0;
+    --lch-ink-darker: 36% 0 0;
+    --lch-ink-dark: 46% 0 0;
+    --lch-ink-medium: 56% 0 0;
+    --lch-ink-medium-dark: 66% 0 0;
+    --lch-ink-light: 76% 0 0;
     --lch-ink-lighter: 86% 0 0;
     --lch-ink-lightest: 97% 0 0;
 
@@ -23,10 +23,7 @@
     --color-ink-darkest: light-dark(oklch(var(--lch-ink-darkest)), oklch(var(--lch-ink-lightest)));
     --color-ink-darker: light-dark(oklch(var(--lch-ink-darker)), oklch(var(--lch-ink-lighter)));
     --color-ink-dark: light-dark(oklch(var(--lch-ink-dark)), oklch(var(--lch-ink-light)));
-    --color-ink-medium: light-dark(
-      oklch(var(--lch-ink-medium)),
-      oklch(from oklch(var(--lch-ink-medium)) calc(l + 0.25) c h)
-    );
+    --color-ink-medium: light-dark(oklch(var(--lch-ink-medium)), oklch(var(--lch-ink-medium-dark)));
     --color-ink-light: light-dark(oklch(var(--lch-ink-light)), oklch(var(--lch-ink-dark)));
     --color-ink-lighter: light-dark(oklch(var(--lch-ink-lighter)), oklch(var(--lch-ink-darker)));
     --color-ink-lightest: light-dark(oklch(var(--lch-ink-lightest)), oklch(var(--lch-ink-darkest)));
@@ -41,20 +38,26 @@
     );
     --color-selection: light-dark(
       oklch(var(--lch-blue) / 0.25),
-      oklch(var(--lch-blue-light) / 0.25)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.285) c h / 0.25)
     );
 
-    --color-accent: light-dark(oklch(var(--lch-blue)), oklch(var(--lch-blue-light)));
+    --color-accent: light-dark(
+      oklch(var(--lch-blue)),
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.285) c h)
+    );
     --color-accent-hover: light-dark(
       oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h),
-      oklch(from oklch(var(--lch-blue-light)) calc(l - 0.15) c h)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.135) c h)
     );
     --color-accent-hover-transparent: light-dark(
       oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h / 0.15),
-      oklch(from oklch(var(--lch-blue-light)) calc(l - 0.15) c h / 0.15)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.135) c h / 0.15)
     );
 
-    --color-success: oklch(var(--lch-green));
+    --color-success: light-dark(
+      oklch(var(--lch-green)),
+      oklch(from oklch(var(--lch-green)) calc(l + 0.146) c h)
+    );
 
     /* Component colors */
     --svg-preview-bg: oklch(70% 0% 0);
