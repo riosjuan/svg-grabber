@@ -36,8 +36,7 @@
     color: var(--color-accent);
 
     &:hover {
-      color: var(--color-ink-inverse);
-      background-color: var(--color-accent-hover);
+      background-color: var(--color-accent-hover-transparent);
     }
   }
 

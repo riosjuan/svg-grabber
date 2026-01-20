@@ -41,7 +41,7 @@
 
   :is(a, button):where(:focus-visible) {
     border-radius: var(--border-radius);
-    outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
+    outline: var(--focus-ring-size, 2px) solid var(--color-accent);
     outline-offset: var(--focus-ring-offset, 1px);
   }
 

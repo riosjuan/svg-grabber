@@ -46,8 +46,12 @@
 
     --color-accent: light-dark(oklch(var(--lch-blue)), oklch(var(--lch-blue-light)));
     --color-accent-hover: light-dark(
-      oklch(from oklch(var(--lch-blue)) calc(l + 0.12) c h),
-      oklch(from oklch(var(--lch-blue-light)) calc(l + 0.06) c h)
+      oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h),
+      oklch(from oklch(var(--lch-blue-light)) calc(l - 0.15) c h)
+    );
+    --color-accent-hover-transparent: light-dark(
+      oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h / 0.15),
+      oklch(from oklch(var(--lch-blue-light)) calc(l - 0.15) c h / 0.15)
     );
 
     --color-success: oklch(var(--lch-green));
