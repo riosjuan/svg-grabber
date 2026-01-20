@@ -38,20 +38,20 @@
     );
     --color-selection: light-dark(
       oklch(var(--lch-blue) / 0.25),
-      oklch(from oklch(var(--lch-blue)) calc(l + 0.285) c h / 0.25)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.288) c h / 0.25)
     );
 
     --color-accent: light-dark(
       oklch(var(--lch-blue)),
-      oklch(from oklch(var(--lch-blue)) calc(l + 0.285) c h)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.288) c h)
     );
     --color-accent-hover: light-dark(
       oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h),
-      oklch(from oklch(var(--lch-blue)) calc(l + 0.135) c h)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.138) c h)
     );
     --color-accent-hover-transparent: light-dark(
       oklch(from oklch(var(--lch-blue)) calc(l - 0.15) c h / 0.15),
-      oklch(from oklch(var(--lch-blue)) calc(l + 0.135) c h / 0.15)
+      oklch(from oklch(var(--lch-blue)) calc(l + 0.138) c h / 0.15)
     );
 
     --color-success: light-dark(
