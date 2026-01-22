@@ -1,0 +1,67 @@
+@layer components {
+  .tooltip {
+    --tooltip-left: 50%;
+    --tooltip-top: auto;
+    --tooltip-bottom: calc(100% + 0.35rem);
+    --tooltip-transform: translate(-50%, -0.25rem);
+    --tooltip-open-transform: translate(-50%, -0.5rem);
+
+    inset: unset;
+    position: absolute;
+    margin: 0;
+    padding: calc(var(--spacing) / 3) var(--inline-spacing);
+    border-radius: calc(var(--border-radius) * 1.5);
+    background: var(--color-ink-darkest);
+    color: var(--color-ink-inverse);
+    box-shadow: 0 0.2rem 0.6rem oklch(var(--lch-ink-darkest) / 0.35);
+    border: none;
+    font-size: var(--text-small);
+    line-height: 1.5em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: var(--tooltip-transform);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+    left: var(--tooltip-left);
+    top: var(--tooltip-top);
+    bottom: var(--tooltip-bottom);
+
+    &:popover-open {
+      opacity: 1;
+      transform: var(--tooltip-open-transform, var(--tooltip-transform));
+    }
+  }
+
+  .tooltip--large {
+    max-width: 35ch;
+    white-space: normal;
+  }
+
+  .tooltip--right {
+    --tooltip-left: calc(100% + 0.35rem);
+    --tooltip-top: 50%;
+    --tooltip-bottom: auto;
+    --tooltip-transform: translate(0, -50%);
+    --tooltip-open-transform: translate(0, -50%);
+  }
+
+  @supports (position-anchor: --tooltip-anchor) and (top: anchor(top)) {
+    .tooltip:where([popover], [popover='hint']) {
+      --tooltip-left: anchor(center);
+      --tooltip-top: calc(anchor(bottom) + 0.35rem);
+      --tooltip-bottom: auto;
+      --tooltip-transform: translate(-50%, 0);
+      --tooltip-open-transform: translate(-50%, 0);
+    }
+
+    .tooltip--right:where([popover], [popover='hint']) {
+      --tooltip-left: calc(anchor(right) + 0.5rem);
+      --tooltip-top: anchor(center);
+      --tooltip-bottom: auto;
+      --tooltip-transform: translate(0, -50%);
+      --tooltip-open-transform: translate(0, -50%);
+    }
+  }
+}

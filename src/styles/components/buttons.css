@@ -1,0 +1,64 @@
+@layer components {
+  .btn {
+    align-items: center;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    color: var(--color-ink-medium);
+    column-gap: var(--inline-spacing);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: var(--text-normal);
+    font-weight: var(--font-weight-semi-bold);
+    justify-content: center;
+    line-height: var(--line-height);
+    padding: calc(var(--block-spacing) / 4) var(--inline-spacing);
+    text-align: center;
+    text-decoration: none;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
+  .btn--large {
+    padding: 0 calc(var(--inline-spacing) * 2);
+    min-height: 2.5rem;
+  }
+
+  .btn--accent {
+    color: var(--color-ink-inverse);
+    background-color: var(--color-accent);
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
+  }
+
+  .btn--outline {
+    background-color: transparent;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+
+    &:hover {
+      background-color: var(--color-accent-hover-transparent);
+    }
+  }
+
+  .btn--icon {
+    --icon-size: 1.5rem;
+
+    border: none;
+    padding: 0.25rem;
+
+    svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
+  }
+}

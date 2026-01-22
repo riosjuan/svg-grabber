@@ -1,0 +1,35 @@
+@layer components {
+  .svg-card {
+    background-color: var(--color-paper);
+    border-radius: calc(var(--border-radius) * 2);
+    border: var(--border);
+    color: #000;
+    display: flex;
+    flex-flow: column;
+    gap: var(--spacing);
+    justify-content: space-between;
+    max-width: var(--max-card-width);
+    padding: var(--spacing);
+  }
+
+  .svg-card__content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: var(--svg-preview-bg);
+    border-radius: calc(var(--border-radius) * 0.75);
+    padding: var(--spacing);
+
+    svg {
+      aspect-ratio: 1;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .svg-card__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) / 2);
+  }
+}

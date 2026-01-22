@@ -29,10 +29,11 @@
       </h1>
       <a id="sender-url" class="sender-url" href="">Source page</a>
       <div class="controls hidden">
-        <div class="preview-controls">
+        <div class="preview-control">
           <label class="sr-only" for="preview-bg">Background brightness</label>
           <span id="preview-bg-light-label" class="sr-only">White</span>
           <input
+            class="preview-control__range"
             id="preview-bg"
             type="range"
             min="0"
@@ -43,8 +44,8 @@
           />
           <span id="preview-bg-dark-label" class="sr-only">Black</span>
         </div>
-        <button type="button" class="btn btn-outline btn-large btn-theme-toggle"></button>
-        <button class="btn btn-accent btn-large btn-download-all">
+        <button type="button" class="btn btn--outline btn--large btn--theme-toggle"></button>
+        <button class="btn btn--accent btn--large btn--download-all">
           <svg
             width="24"
             height="24"
@@ -84,42 +85,40 @@
           <h2 class="source-title">
             <span id="sender-url-secondary" class="sender-url">Source page</span>
           </h2>
-          <div class="svg-tooltip-anchor">
-            <button
-              class="btn btn-icon"
-              style="anchor-name: --anchor-btn-2; --icon-size: 1rem"
-              popovertarget="my-tooltip-2"
-              type="button"
-              aria-describedby="my-tooltip-2"
+          <button
+            class="btn btn--icon"
+            style="anchor-name: --anchor-btn-2; --icon-size: 1rem"
+            popovertarget="my-tooltip-2"
+            type="button"
+            aria-describedby="my-tooltip-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg>
 
-              <span class="sr-only">Open Tooltip</span>
-            </button>
-            <div
-              id="my-tooltip-2"
-              class="svg-tooltip svg-tooltip-large svg-tooltip-right"
-              style="position-anchor: --anchor-btn-2"
-              popover
-              role="tooltip"
-            >
-              <p>
-                Some logos and artwork are protected by copyright or trademark. You may download
-                them freely, but use requires proper permission from the rights holder.
-              </p>
-            </div>
+            <span class="sr-only">Open Tooltip</span>
+          </button>
+          <div
+            id="my-tooltip-2"
+            class="tooltip tooltip--large tooltip--right"
+            style="position-anchor: --anchor-btn-2"
+            popover
+            role="tooltip"
+          >
+            <p>
+              Some logos and artwork are protected by copyright or trademark. You may download them
+              freely, but use requires proper permission from the rights holder.
+            </p>
           </div>
         </div>
         <p>

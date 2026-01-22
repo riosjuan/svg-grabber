@@ -20,8 +20,8 @@ const getElements = () => ({
   senderTextSecondary: document.getElementById('sender-url-secondary'),
   svgGallery: document.getElementById('gallery-svg'),
   controls: document.querySelector('.controls'),
-  downloadAllButton: document.querySelector('.btn-download-all'),
-  previewControls: document.querySelector('.preview-controls'),
+  downloadAllButton: document.querySelector('.btn--download-all'),
+  previewControls: document.querySelector('.preview-control'),
 });
 
 const sanitizeSvgForPreview = (svg) => {
@@ -80,14 +80,14 @@ const createSvgCard = (svg, sender, index) => {
   actions.classList.add('svg-card__actions');
 
   const copyButton = document.createElement('button');
-  copyButton.classList.add('btn', 'btn-icon', 'copy');
+  copyButton.classList.add('btn', 'btn--icon', 'copy');
   copyButton.type = 'button';
   copyButton.setAttribute('aria-label', COPY_TOOLTIP_TEXT);
   copyButton.id = `copy-btn-${index}`;
   copyButton.innerHTML = copyIcon;
 
   const downloadLink = document.createElement('a');
-  downloadLink.classList.add('btn', 'btn-icon');
+  downloadLink.classList.add('btn', 'btn--icon');
   downloadLink.download = `${toSafeFilename(sender)}-${index}.svg`;
   downloadLink.href = `data:text/svg;base64,${base64doc}`;
   downloadLink.setAttribute('aria-label', DOWNLOAD_TOOLTIP_TEXT);

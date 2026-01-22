@@ -1,6 +1,6 @@
 const createTooltip = (id, text) => {
   const tooltip = document.createElement('div');
-  tooltip.classList.add('svg-tooltip');
+  tooltip.classList.add('tooltip');
   tooltip.id = id;
   tooltip.setAttribute('popover', 'hint');
   tooltip.setAttribute('role', 'tooltip');

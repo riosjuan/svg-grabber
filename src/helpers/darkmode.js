@@ -1,7 +1,7 @@
 // import { moonIcon, sunIcon } from '../svg-core/icons';
 
 const THEME_STORAGE_KEY = 'theme-preference';
-const themeToggleSelector = '.btn-theme-toggle';
+const themeToggleSelector = '.btn--theme-toggle';
 
 const getSystemTheme = () =>
   window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

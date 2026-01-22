@@ -11,6 +11,15 @@
     display: none;
   }
 
+  .is-success {
+    pointer-events: none;
+    animation: pop-in 200ms ease-out both;
+
+    svg {
+      color: var(--color-success);
+    }
+  }
+
   .sr-only {
     border: 0;
     clip: rect(0 0 0 0);

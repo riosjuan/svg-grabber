@@ -18,7 +18,7 @@ const getZipName = (label) => {
 
 // Set up 'Download All' button functionality
 const setupDownloadAllButton = () => {
-  const downloadAllButton = document.querySelector('.btn-download-all');
+  const downloadAllButton = document.querySelector('.btn--download-all');
   if (!downloadAllButton) return;
 
   downloadAllButton.addEventListener('click', () => {
