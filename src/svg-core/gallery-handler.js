@@ -14,7 +14,6 @@ const COPY_LABEL_FALLBACK_TEXT = 'Copy';
 const DOWNLOAD_TOOLTIP_TEXT = 'Download SVG';
 
 const getElements = () => ({
-  header: document.getElementById('header'),
   svgCount: document.getElementById('svg-count'),
   senderLink: document.getElementById('sender-url'),
   senderTextSecondary: document.getElementById('sender-url-secondary'),
