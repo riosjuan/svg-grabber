@@ -1,36 +1,36 @@
 @layer components {
   .slider {
+    --border-size: 0.125rem;
+    --thumb-size: 1.5rem;
+    --track-size: 2.5rem;
+
     align-items: center;
-    border-radius: calc(var(--border-radius) * 2);
-    border: var(--border);
+    border-radius: var(--border-radius);
     color: var(--color-ink-medium);
     display: flex;
     font-size: var(--text-normal);
     font-weight: var(--font-weight-semi-bold);
+    outline-offset: calc(var(--border-size) * -1);
+    outline: var(--border-size) solid var(--color-border);
   }
 
   .slider__range {
-    --thumb-size: 1.5rem;
-    --track-size: 2.5rem;
-    --track-border: 0.125rem;
-
     appearance: none;
     background: linear-gradient(90deg, oklch(var(--lch-white)), oklch(var(--lch-black)));
-    border-radius: calc(var(--border-radius) * 2);
+    border-radius: var(--border-radius);
     color: var(--color-accent);
     cursor: pointer;
-    height: calc(var(--track-size) - calc(var(--track-border) * 4));
+    height: var(--track-size);
+    padding: var(--border-size);
     width: 10rem;
-    border: var(--track-border) solid var(--color-paper);
   }
 
   .slider__range::-webkit-slider-thumb {
     appearance: none;
     background: var(--color-paper);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    height: var(--track-size);
-    width: calc(var(--track-size) / 2);
+    border-radius: calc(var(--border-radius) / 2);
+    height: calc(var(--track-size) - calc(var(--border-size) * 2));
+    width: var(--thumb-size);
     touch-action: manipulation;
     transition-property: background-color, border-color, box-shadow, filter, outline;
     transition: 0.1s ease-out;
