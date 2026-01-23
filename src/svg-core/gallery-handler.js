@@ -19,9 +19,9 @@ const getElements = () => ({
   senderLink: document.getElementById('sender-url'),
   senderTextSecondary: document.getElementById('sender-url-secondary'),
   svgGallery: document.getElementById('gallery-svg'),
-  controls: document.querySelector('.controls'),
+  controls: document.querySelector('.header__controls'),
   downloadAllButton: document.querySelector('.btn--download-all'),
-  previewControls: document.querySelector('.preview-control'),
+  previewControls: document.querySelector('.slider'),
 });
 
 const sanitizeSvgForPreview = (svg) => {
@@ -69,15 +69,15 @@ const sanitizeSvgForPreview = (svg) => {
 const createSvgCard = (svg, sender, index) => {
   const element = document.createElement('div');
   const base64doc = btoa(unescape(encodeURIComponent(svg)));
-  element.classList.add('svg-card');
+  element.classList.add('card');
   element.dataset.rawSvg = svg;
 
   const content = document.createElement('div');
-  content.classList.add('svg-card__content');
+  content.classList.add('card__content');
   content.innerHTML = sanitizeSvgForPreview(svg);
 
   const actions = document.createElement('div');
-  actions.classList.add('svg-card__actions');
+  actions.classList.add('card__actions');
 
   const copyButton = document.createElement('button');
   copyButton.classList.add('btn', 'btn--icon', 'copy');
@@ -200,7 +200,7 @@ export const setSvgUrl = (data, sender, pageUrl) => {
 
 const copySvg = (event) => {
   const copyButton = event.target.closest('button.copy');
-  const svgCard = event.target.closest('.svg-card');
+  const svgCard = event.target.closest('.card');
   const rawSvg = svgCard?.dataset.rawSvg;
 
   if (!rawSvg) {

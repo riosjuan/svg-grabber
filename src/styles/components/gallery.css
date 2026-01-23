@@ -1,0 +1,11 @@
+@layer components {
+  .gallery {
+    --max-card-width: 16rem;
+
+    align-content: stretch;
+    display: grid;
+    gap: var(--spacing);
+    grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
+    grid-template-rows: auto;
+  }
+}

@@ -1,0 +1,34 @@
+@layer components {
+  .header {
+    align-items: center;
+    background-color: var(--color-canvas);
+    border-block-end: 1px solid var(--color-border);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-normal);
+    gap: var(--spacing);
+    inset: 0 0 auto 0;
+    padding: 1rem var(--spacing);
+    position: sticky;
+    z-index: 10;
+  }
+
+  .header__source-page {
+    overflow-wrap: anywhere;
+  }
+
+  .header__divider {
+    height: 2.5rem;
+    width: 1px;
+    background-color: var(--color-border);
+  }
+
+  .header__controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+    margin-inline-start: auto;
+  }
+}

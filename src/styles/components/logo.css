@@ -6,12 +6,5 @@
     column-gap: var(--spacing);
     height: var(--logo-height);
     color: light-dark(black, white);
-
-    &::after {
-      content: '';
-      display: block;
-      border-inline-end: var(--border);
-      height: var(--logo-height);
-    }
   }
 }

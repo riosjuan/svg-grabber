@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
 
-  <body class="layout-grid">
+  <body class="layout">
     <header class="header">
       <h1 class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 136 40">
@@ -27,13 +27,14 @@
         </svg>
         <span class="sr-only">svg-grabber</span>
       </h1>
-      <a id="sender-url" class="sender-url" href="">Source page</a>
-      <div class="controls hidden">
-        <div class="preview-control">
+      <span class="header__divider" aria-hidden="true"></span>
+      <a id="sender-url" class="header__source-page" href="">Source page</a>
+      <div class="header__controls hidden">
+        <div class="slider">
           <label class="sr-only" for="preview-bg">Background brightness</label>
           <span id="preview-bg-light-label" class="sr-only">White</span>
           <input
-            class="preview-control__range"
+            class="slider__range"
             id="preview-bg"
             type="range"
             min="0"
@@ -79,10 +80,10 @@
         </button>
       </div>
     </header>
-    <main class="container">
-      <div class="source-section">
-        <div class="source-header">
-          <h2 class="source-title">
+    <main class="layout__content">
+      <div class="source">
+        <div class="source__header">
+          <h2 class="source__title">
             <span id="sender-url-secondary" class="sender-url">Source page</span>
           </h2>
           <button
@@ -125,7 +126,7 @@
           <span id="svg-count" class="text-small">0</span>
         </p>
       </div>
-      <div id="gallery-svg" class="svg-grid"></div>
+      <div id="gallery-svg" class="gallery"></div>
       <input class="clipboard hidden" />
     </main>
     <footer class="footer">

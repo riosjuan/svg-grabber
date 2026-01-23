@@ -23,7 +23,7 @@ const setupDownloadAllButton = () => {
 
   downloadAllButton.addEventListener('click', () => {
     const zip = new JSZip();
-    document.querySelectorAll('.svg-card').forEach((card, index) => {
+    document.querySelectorAll('.card').forEach((card, index) => {
       const safeLabel = sanitizeFilename(lastSourceLabel) || DEFAULT_NAME;
       const rawSvg = card.dataset.rawSvg;
       if (rawSvg) {

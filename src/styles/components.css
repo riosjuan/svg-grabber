@@ -1,28 +1,9 @@
 @import url('./components/buttons.css') layer(components);
+@import url('./components/card.css') layer(components);
+@import url('./components/footer.css') layer(components);
+@import url('./components/gallery.css') layer(components);
+@import url('./components/header.css') layer(components);
 @import url('./components/logo.css') layer(components);
-@import url('./components/preview-control.css') layer(components);
-@import url('./components/svg-card.css') layer(components);
+@import url('./components/slider.css') layer(components);
+@import url('./components/source.css') layer(components);
 @import url('./components/tooltips.css') layer(components);
-
-@layer components {
-  .sender-url {
-    overflow-wrap: anywhere;
-  }
-
-  .source-section {
-    margin-block-end: var(--spacing);
-  }
-
-  .source-header {
-    align-items: center;
-    column-gap: calc(var(--spacing) / 8);
-    display: flex;
-    margin-block-end: calc(var(--block-spacing) / 4);
-  }
-
-  .source-title {
-    color: var(--color-ink-darker);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--text-normal);
-  }
-}

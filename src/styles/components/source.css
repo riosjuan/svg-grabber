@@ -1,0 +1,18 @@
+@layer components {
+  .source {
+    margin-block-end: var(--spacing);
+  }
+
+  .source__header {
+    align-items: center;
+    column-gap: calc(var(--spacing) / 8);
+    display: flex;
+    margin-block-end: calc(var(--block-spacing) / 4);
+  }
+
+  .source__title {
+    color: var(--color-ink-darker);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-normal);
+  }
+}

@@ -1,5 +1,5 @@
 @layer components {
-  .preview-control {
+  .slider {
     align-items: center;
     border-radius: calc(var(--border-radius) * 2);
     border: var(--border);
@@ -9,7 +9,7 @@
     font-weight: var(--font-weight-semi-bold);
   }
 
-  .preview-control__range {
+  .slider__range {
     --thumb-size: 1.5rem;
     --track-size: 2.5rem;
     --track-border: 0.125rem;
@@ -24,7 +24,7 @@
     border: var(--track-border) solid var(--color-paper);
   }
 
-  .preview-control__range::-webkit-slider-thumb {
+  .slider__range::-webkit-slider-thumb {
     appearance: none;
     background: var(--color-paper);
     border: var(--border);
@@ -36,11 +36,11 @@
     transition: 0.1s ease-out;
   }
 
-  .preview-control__range::-webkit-slider-thumb:hover {
+  .slider__range::-webkit-slider-thumb:hover {
     background: var(--color-accent-hover);
   }
 
-  .preview-control__range:focus-visible::-webkit-slider-thumb {
+  .slider__range:focus-visible::-webkit-slider-thumb {
     outline: var(--focus-ring-size, 2px) solid var(--color-accent-hover);
     outline-offset: var(--focus-ring-offset, 1px);
   }

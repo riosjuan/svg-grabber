@@ -1,5 +1,5 @@
 @layer components {
-  .svg-card {
+  .card {
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
     border: var(--border);
@@ -12,7 +12,7 @@
     padding: var(--spacing);
   }
 
-  .svg-card__content {
+  .card__content {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@
     }
   }
 
-  .svg-card__actions {
+  .card__actions {
     display: flex;
     justify-content: flex-end;
     gap: calc(var(--spacing) / 2);

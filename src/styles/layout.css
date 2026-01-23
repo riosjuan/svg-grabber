@@ -1,65 +1,11 @@
 @layer layout {
-  .layout-grid {
+  .layout {
     display: grid;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
   }
 
-  .header {
-    align-items: center;
-    background-color: var(--color-canvas);
-    border-block-end: 1px solid var(--color-border);
-    display: flex;
-    flex-wrap: wrap;
-    font-size: var(--text-normal);
-    gap: var(--spacing);
-    inset: 0 0 auto 0;
-    padding: 1rem var(--spacing);
-    position: sticky;
-    z-index: 10;
-  }
-
-  .header-divider {
-    height: 2.5rem;
-    width: 1px;
-    background-color: var(--color-border);
-  }
-
-  .container {
+  .layout__content {
     padding: var(--spacing);
-  }
-
-  .footer {
-    padding: calc(var(--spacing) * 2) var(--spacing);
-    text-align: center;
-    font-size: var(--text-normal);
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .svg-grid {
-    --max-card-width: 16rem;
-
-    align-content: stretch;
-    display: grid;
-    gap: var(--spacing);
-    grid-template-columns: repeat(auto-fill, minmax(var(--max-card-width), 1fr));
-    grid-template-rows: auto;
-  }
-
-  .controls {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: var(--spacing);
-    margin-inline-start: auto;
   }
 }
