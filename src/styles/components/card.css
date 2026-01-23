@@ -2,7 +2,6 @@
   .card {
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
-    border: var(--border);
     color: #000;
     display: flex;
     flex-flow: column;
@@ -10,6 +9,7 @@
     justify-content: space-between;
     max-width: var(--max-card-width);
     padding: var(--spacing);
+    box-shadow: var(--shadow-elevation-low);
   }
 
   .card__content {

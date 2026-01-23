@@ -13,7 +13,7 @@
     border-radius: calc(var(--border-radius) * 1.5);
     background: var(--color-ink-darkest);
     color: var(--color-ink-inverse);
-    box-shadow: 0 0.2rem 0.6rem oklch(var(--lch-ink-darkest) / 0.35);
+    box-shadow: var(--shadow-elevation-medium);
     border: none;
     font-size: var(--text-small);
     line-height: 1.5em;

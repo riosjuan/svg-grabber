@@ -4,6 +4,13 @@
     --thumb-size: 1.5rem;
     --track-size: 2.5rem;
 
+    --shadow-color: 0deg 0% 0%;
+    --shadow-elevation-low:
+      0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.11),
+      0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.11),
+      2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.11),
+      5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.11);
+
     align-items: center;
     border-radius: var(--border-radius);
     color: var(--color-ink-medium);
@@ -27,17 +34,19 @@
 
   .slider__range::-webkit-slider-thumb {
     appearance: none;
-    background: var(--color-paper);
+    background: oklch(var(--lch-white));
     border-radius: calc(var(--border-radius) / 2);
+    box-shadow: var(--shadow-elevation-medium);
     height: calc(var(--track-size) - calc(var(--border-size) * 2));
-    width: var(--thumb-size);
     touch-action: manipulation;
     transition-property: background-color, border-color, box-shadow, filter, outline;
     transition: 0.1s ease-out;
+    width: var(--thumb-size);
   }
 
   .slider__range::-webkit-slider-thumb:hover {
     background: var(--color-accent-hover);
+    box-shadow: var(--shadow-elevation-low);
   }
 
   .slider__range:focus-visible::-webkit-slider-thumb {
