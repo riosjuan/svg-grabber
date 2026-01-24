@@ -1,5 +1,7 @@
 @layer components {
   .btn {
+    --button-size: 2.5rem;
+
     align-items: center;
     background-color: transparent;
     border-radius: var(--border-radius);
@@ -12,7 +14,9 @@
     font-weight: var(--font-weight-semi-bold);
     justify-content: center;
     line-height: var(--line-height);
-    padding: calc(var(--block-spacing) / 4) var(--inline-spacing);
+    min-height: var(--button-size);
+    min-width: var(--button-size);
+    padding: 0 var(--inline-spacing);
     text-align: center;
     text-decoration: none;
 
@@ -26,9 +30,16 @@
     }
   }
 
-  .btn--large {
-    padding: 0 calc(var(--inline-spacing) * 2);
-    min-height: 2.5rem;
+  .btn--icon {
+    --icon-size: 1.5rem;
+
+    border: none;
+    padding: 0;
+
+    svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
   }
 
   .btn--accent {
@@ -50,15 +61,8 @@
     }
   }
 
-  .btn--icon {
-    --icon-size: 1.5rem;
-
-    border: none;
-    padding: 0.25rem;
-
-    svg {
-      width: var(--icon-size);
-      height: var(--icon-size);
-    }
+  .btn--small {
+    --button-size: 1.5rem;
+    --icon-size: 1rem;
   }
 }
