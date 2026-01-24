@@ -6,13 +6,13 @@
     background-color: var(--color-canvas);
     border-block-end: var(--border);
     box-shadow: none;
-    block-size: var(--header-height);
     display: flex;
     flex-wrap: wrap;
     font-size: var(--text-normal);
     gap: var(--spacing);
     inset: 0 0 auto 0;
-    padding-inline: var(--spacing);
+    min-block-size: var(--header-height);
+    padding: 1rem var(--spacing);
     position: sticky;
     z-index: 10;
   }

@@ -7,7 +7,7 @@
     flex-flow: column;
     gap: var(--spacing);
     justify-content: space-between;
-    max-width: var(--max-card-width);
+    max-width: max(var(--max-card-width), 80%);
     padding: var(--spacing);
   }
 
