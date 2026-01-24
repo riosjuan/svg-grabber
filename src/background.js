@@ -1,7 +1,3 @@
-// Initialize a counter for generating unique IDs for new tabs.
-// Starting at 100 to avoid potential conflicts with lower numbers.
-let id = 100;
-
 // Listen for clicks on the browser action
 chrome.action.onClicked.addListener(async (tab) => {
   // Execute content.js in the active tab
@@ -14,7 +10,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message.type === 'open_new_tab') {
     (async () => {
-      const viewTabUrl = chrome.runtime.getURL(`svg-grabber.html?id=${id++}`);
+      const viewTabUrl = chrome.runtime.getURL('svg-grabber.html');
       const data = request.message.data;
       const title = sender.tab.title || sender.tab.url;
       const pageUrl = sender.tab.url;
