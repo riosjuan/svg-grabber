@@ -28,6 +28,8 @@
     --color-ink-lighter: light-dark(oklch(var(--lch-ink-lighter)), oklch(var(--lch-ink-darker)));
     --color-ink-lightest: light-dark(oklch(var(--lch-ink-lightest)), oklch(var(--lch-ink-darkest)));
     --color-ink-inverse: light-dark(oklch(var(--lch-white)), oklch(var(--lch-black)));
+    --color-ink-black: oklch(var(--lch-black));
+    --color-ink-white: oklch(var(--lch-white));
     --color-border: light-dark(
       oklch(var(--lch-ink-darkest) / 0.15),
       oklch(var(--lch-ink-lightest) / 0.15)
@@ -59,6 +61,10 @@
       oklch(from oklch(var(--lch-green)) calc(l + 0.146) c h)
     );
 
+    /* Component colors */
+    --svg-preview-bg: oklch(70% 0% 0);
+
+    /* Shadow */
     --shadow-elevation-low:
       0px 1px 1.1px oklch(var(--lch-black) / 0.1),
       0px 1.7px 1.9px -1.2px oklch(var(--lch-black) / 0.1),
@@ -68,9 +74,6 @@
       0px 3.3px 3.7px -0.8px oklch(var(--lch-black) / 0.11),
       0.1px 8.2px 9.2px -1.7px oklch(var(--lch-black) / 0.11),
       0.3px 20px 22.5px -2.5px oklch(var(--lch-black) / 0.11);
-
-    /* Component colors */
-    --svg-preview-bg: oklch(70% 0% 0);
 
     /* Typography */
     --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -85,6 +88,7 @@
 
     --line-height: 1.3em;
 
+    /* Borders */
     --border: 1px solid var(--color-border);
 
     /* Layout */

@@ -2,18 +2,18 @@
   .card {
     background-color: var(--color-paper);
     border-radius: calc(var(--border-radius) * 2);
-    color: #000;
+    border: var(--border);
     display: flex;
     flex-flow: column;
     gap: var(--spacing);
     justify-content: space-between;
     max-width: var(--max-card-width);
     padding: var(--spacing);
-    box-shadow: var(--shadow-elevation-low);
   }
 
   .card__content {
     align-items: center;
+    color: var(--color-ink-black);
     display: flex;
     justify-content: center;
     background-color: var(--svg-preview-bg);
