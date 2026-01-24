@@ -1,16 +1,37 @@
 @layer components {
   .header {
+    --header-height: 5rem;
+
     align-items: center;
     background-color: var(--color-canvas);
-    border-block-end: 1px solid var(--color-border);
+    border-block-end: var(--border);
+    box-shadow: none;
+    block-size: var(--header-height);
     display: flex;
     flex-wrap: wrap;
     font-size: var(--text-normal);
     gap: var(--spacing);
     inset: 0 0 auto 0;
-    padding: 1rem var(--spacing);
+    padding-inline: var(--spacing);
     position: sticky;
     z-index: 10;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .header {
+      animation: header-shadow linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 1rem;
+    }
+
+    @keyframes header-shadow {
+      from {
+        box-shadow: none;
+      }
+      to {
+        box-shadow: var(--shadow-elevation-low);
+      }
+    }
   }
 
   .header__source-page {
@@ -18,9 +39,9 @@
   }
 
   .header__divider {
-    height: 2.5rem;
-    width: 1px;
     background-color: var(--color-border);
+    block-size: calc(var(--header-height) / 2);
+    inline-size: 1px;
   }
 
   .header__controls {
