@@ -6,6 +6,8 @@ import {
   removeStyleAttribute,
 } from './modifiers';
 
+const EXTERNAL_SVG_FETCH_CONCURRENCY = 8;
+
 export const removeDuplicateSVGs = (svgNodes) => {
   if (!Array.isArray(svgNodes)) {
     console.error('Input is not an array');
@@ -55,26 +57,37 @@ export const processInlineSVGs = () => {
 
 export const processExternalSVGs = async () => {
   try {
-    const imgElements = document.querySelectorAll('img[src$=".svg"]');
-    const svgPromises = Array.from(imgElements).map(async (img) => {
-      try {
-        const response = await fetch(img.src);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const svgText = await response.text();
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
-        if (svgDoc.documentElement.tagName === 'parsererror') {
-          throw new Error('SVG parsing error');
-        }
-        return processSVGNode(svgDoc.documentElement);
-      } catch (error) {
-        console.error(ERROR_NOT_SVG_ELEMENT, error);
-        return null;
-      }
-    });
-    const svgNodes = (await Promise.all(svgPromises)).filter(Boolean);
+    const imgElements = Array.from(document.querySelectorAll('img[src$=".svg"]'));
+    if (imgElements.length === 0) return [];
+
+    const svgNodes = [];
+
+    for (let index = 0; index < imgElements.length; index += EXTERNAL_SVG_FETCH_CONCURRENCY) {
+      const batch = imgElements.slice(index, index + EXTERNAL_SVG_FETCH_CONCURRENCY);
+      const batchResults = await Promise.all(
+        batch.map(async (img) => {
+          try {
+            const response = await fetch(img.src);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const svgText = await response.text();
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+            if (svgDoc.documentElement.tagName === 'parsererror') {
+              throw new Error('SVG parsing error');
+            }
+            return processSVGNode(svgDoc.documentElement);
+          } catch (error) {
+            console.error(ERROR_NOT_SVG_ELEMENT, error);
+            return null;
+          }
+        })
+      );
+
+      svgNodes.push(...batchResults.filter(Boolean));
+    }
+
     return removeDuplicateSVGs(svgNodes);
   } catch (error) {
     console.error('Error processing external SVGs:', error);
