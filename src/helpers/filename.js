@@ -6,6 +6,7 @@ export const sanitizeFilename = (input, fallback = DEFAULT_FILENAME) => {
     input
       .toString()
       .trim()
+      // eslint-disable-next-line no-control-regex
       .replace(/[<>:"/\\|?*\x00-\x1F]/g, '-')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
