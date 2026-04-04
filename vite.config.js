@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   build: {
@@ -19,16 +18,5 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        { src: 'public/manifest.json', dest: '' },
-        { src: 'public/svg-grabber-16.png', dest: '' },
-        { src: 'public/svg-grabber-48.png', dest: '' },
-        { src: 'public/svg-grabber-128.png', dest: '' },
-        { src: 'public/svg-grabber.html', dest: '' },
-      ],
-    }),
-  ],
-  publicDir: 'public', // Serve files directly from the public directory
+  publicDir: 'public',
 });
