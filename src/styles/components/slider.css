@@ -2,8 +2,8 @@
   .slider {
     --border-size: 0.125rem;
     --thumb-size: 1.5rem;
+    --thumb-outline: inset 0 0 0 1px oklch(var(--lch-white));
     --track-size: 2.5rem;
-
     --shadow-color: 0deg 0% 0%;
     --shadow-elevation-low:
       0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.11),
@@ -46,7 +46,16 @@
 
   .slider__range::-webkit-slider-thumb:hover {
     background: var(--color-accent-hover);
-    box-shadow: var(--shadow-elevation-low);
+    box-shadow:
+      var(--thumb-outline),
+      var(--shadow-elevation-low);
+  }
+
+  .slider__range:active::-webkit-slider-thumb {
+    background: var(--color-accent);
+    box-shadow:
+      var(--thumb-outline),
+      var(--shadow-elevation-low);
   }
 
   .slider__range:focus-visible::-webkit-slider-thumb {

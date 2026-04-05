@@ -4,7 +4,7 @@
   "name": "svg-grabber - Grab all the SVGs from any website",
   "short_name": "svg-grabber",
   "description": "Preview, download, or copy the code for any SVG icon or illustration, ready to use in Sketch, Figma, or Framer.",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "background": {
     "service_worker": "background.js"
   },
